@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-primary: #2563EB;
+  --color-secondary: #06B6D4;
+  --color-accent: #7C3AED;
+  --color-dark-bg: #050816;
+  --color-card-bg: rgba(255, 255, 255, 0.05);
+  --color-border-color: rgba(255, 255, 255, 0.08);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-heading: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  
+  --animate-pulse-glow: pulse-glow 8s infinite ease-in-out;
+  --animate-border-flow: border-flow 6s infinite linear;
+  
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.3; transform: scale(1) translate(0, 0); }
+    50% { opacity: 0.6; transform: scale(1.1) translate(20px, -20px); }
+  }
+  @keyframes border-flow {
+    0% { border-color: rgba(37, 99, 235, 0.4); }
+    33% { border-color: rgba(6, 182, 212, 0.4); }
+    66% { border-color: rgba(124, 58, 237, 0.4); }
+    100% { border-color: rgba(37, 99, 235, 0.4); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --background: #050816;
+  --foreground: #f8fafc;
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: #050816;
+  color: #f8fafc;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: auto; /* Handled by Lenis smooth scroll */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Glassmorphism Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 10px 40px rgba(6, 182, 212, 0.08);
+}
+
+/* Glow Effects */
+.glow-primary {
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
+}
+.glow-secondary {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.25);
+}
+.glow-accent {
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+/* Dynamic Gradients */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Cursor Glow Overlay */
+.cursor-spotlight {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(6, 182, 212, 0.04), transparent 40%),
+              radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(124, 58, 237, 0.03), transparent 40%);
+}
+
+/* Magnetic Button support */
+.magnetic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom terminal scanlines */
+.terminal-scanline {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+}
+
