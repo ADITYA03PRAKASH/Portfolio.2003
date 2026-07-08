@@ -1,300 +1,385 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Terminal as TermIcon, ArrowRight, Download, Mail, ChevronRight } from "lucide-react";
+import { useRef } from "react";
+import {
+  motion,
+  useInView,
+} from "framer-motion";
+import {
+  ArrowRight,
+  Download,
+  Brain,
+  Star,
+  ChevronDown,
+} from "lucide-react";
 
-const roles = ["Full Stack Developer", "AI Engineer", "Software Architect"];
+/* ─── Animation variants ────────────────────────────────────────── */
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
+  },
+};
 
-interface ConsoleLine {
-  text: string;
-  type: "input" | "output" | "error" | "system";
+const itemVariants = {
+  hidden:  { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
+};
+
+const rightVariants = {
+  hidden:  { opacity: 0, scale: 0.88, x: 40 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    transition: { duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
+};
+
+/* ─── Stat micro-card ───────────────────────────────────────────── */
+interface StatCardProps {
+  value: string;
+  label: string;
+}
+function StatCard({ value, label }: StatCardProps) {
+  return (
+    <div
+      className="
+        bg-white border border-[#F1E4DA]
+        rounded-2xl px-4 py-3 text-center
+        shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.04)]
+        hover:shadow-[0_4px_16px_rgba(255,107,0,0.08),0_16px_40px_rgba(255,107,0,0.05)]
+        hover:border-[#E8D5C8]
+        transition-all duration-300
+        flex-1
+      "
+    >
+      <div
+        className="font-heading font-black text-[#FF6B00] text-xl leading-none mb-1"
+      >
+        {value}
+      </div>
+      <div
+        className="text-[#999999] text-[10px] uppercase tracking-wider font-semibold"
+      >
+        {label}
+      </div>
+    </div>
+  );
 }
 
+/* ─── Floating glass info card ──────────────────────────────────── */
+interface FloatCardProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+function FloatCard({ children, className = "", delay = 0 }: FloatCardProps) {
+  return (
+    <div
+      className={`
+        absolute z-20
+        glass-card
+        bg-white/85 backdrop-blur-xl
+        border border-[#F1E4DA]
+        rounded-2xl px-3 py-2.5
+        shadow-[0_4px_24px_rgba(0,0,0,0.07)]
+        animate-float
+        ${className}
+      `}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── Hero ──────────────────────────────────────────────────────── */
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
+  const heroRef  = useRef<HTMLElement>(null);
+  const leftRef  = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
-  // Terminal State
-  const [terminalInput, setTerminalInput] = useState("");
-  const [terminalHistory, setTerminalHistory] = useState<ConsoleLine[]>([
-    { text: "Welcome to Aditya's Interactive Shell v1.0.0", type: "system" },
-    { text: "Type 'help' to see list of available commands.", type: "system" },
-    { text: "", type: "output" },
-  ]);
-  const consoleBottomRef = useRef<HTMLDivElement>(null);
+  const leftInView  = useInView(leftRef,  { once: true, amount: 0.25 });
+  const rightInView = useInView(rightRef, { once: true, amount: 0.2  });
 
-  // typing effect logic for roles
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const handleTyping = () => {
-      const fullText = roles[roleIndex];
-      if (!isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-        setTypingSpeed(100);
-        if (currentText === fullText) {
-          timer = setTimeout(() => setIsDeleting(true), 2000);
-          return;
-        }
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-        setTypingSpeed(50);
-        if (currentText === "") {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-          return;
-        }
-      }
-
-      timer = setTimeout(handleTyping, typingSpeed);
-    };
-
-    timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, roleIndex, typingSpeed]);
-
-  // Terminal submission logic
-  const handleTerminalSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
-    if (!cmd) return;
-
-    const newHistory = [...terminalHistory, { text: `aditya@portfolio:~$ ${terminalInput}`, type: "input" as const }];
-
-    switch (cmd) {
-      case "help":
-        newHistory.push(
-          { text: "Available commands:", type: "output" },
-          { text: "  about     - Learn more about my professional profile", type: "output" },
-          { text: "  skills    - View a summarized skills breakdown", type: "output" },
-          { text: "  projects  - View featured project list", type: "output" },
-          { text: "  clear     - Clean up terminal history", type: "output" },
-          { text: "  socials   - View links to get in touch", type: "output" }
-        );
-        break;
-      case "about":
-        newHistory.push(
-          { text: "Aditya Prakash Dwivedi - AI & Full Stack Developer", type: "output" },
-          { text: "Experience: Full Stack & AI Developer at Tevatel Software Solutions.", type: "output" },
-          { text: "Availability: Freelance, Full-Time, Contract", type: "output" },
-          { text: "Location: Delhi, India (Remote Global)", type: "output" }
-        );
-        break;
-      case "skills":
-        newHistory.push(
-          { text: "Technical Skills Matrix:", type: "output" },
-          { text: "  Frontend:  ■■■■■■■■■□ 90% (Next.js, React, TS, Tailwind)", type: "output" },
-          { text: "  Backend:   ■■■■■■■■□□ 80% (Node, Express, REST/GraphQL)", type: "output" },
-          { text: "  DevOps:    ■■■■■■■■□□ 80% (Docker, CI/CD, Vercel, Linux)", type: "output" },
-          { text: "  Languages: ■■■■■■■■■□ 90% (JS, TS, Python, SQL)", type: "output" }
-        );
-        break;
-      case "projects":
-        newHistory.push(
-          { text: "Featured Projects:", type: "output" },
-          { text: "  1. AI Voice Agent - Conversational assistant at Tevatel", type: "output" },
-          { text: "  2. EHub - Full-stack startup site (ehubind.com)", type: "output" },
-          { text: "  3. Smart Task Manager - Full-stack MERN board application", type: "output" },
-          { text: "Scroll down to the Projects section to see full case studies!", type: "output" }
-        );
-        break;
-      case "clear":
-        setTerminalHistory([]);
-        setTerminalInput("");
-        return;
-      case "socials":
-        newHistory.push(
-          { text: "GitHub:   https://github.com/ADITYA03PRAKASH", type: "output" },
-          { text: "LinkedIn: https://www.linkedin.com/in/aditya-prakash-dwivedi-839943320", type: "output" },
-          { text: "Email:    adityaprakash112233@gmail.com", type: "output" }
-        );
-        break;
-      default:
-        newHistory.push({ text: `Command not found: '${cmd}'. Type 'help' for options.`, type: "error" });
-    }
-
-    setTerminalHistory(newHistory);
-    setTerminalInput("");
-
-    // Auto scroll to bottom
-    setTimeout(() => {
-      consoleBottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 50);
-  };
-
-  const handleScrollTo = (id: string) => {
+  const handleScroll = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-16 overflow-hidden md:px-12"
+      ref={heroRef}
+      className="
+        relative min-h-screen flex items-center
+        overflow-hidden
+        bg-white dot-grid
+        pt-24 pb-16
+      "
     >
-      {/* Decorative background grid lights */}
-      <div className="absolute top-[20%] left-[-10%] w-[30vw] h-[30vw] rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-accent/10 blur-[120px] pointer-events-none" />
+      {/* ─── Soft orange background blobs ────────────────────────── */}
+      <div
+        aria-hidden="true"
+        className="
+          absolute top-[-10%] right-[-5%]
+          w-[600px] h-[600px] rounded-full
+          bg-gradient-to-br from-[#FF6B00] to-[#FF8A00]
+          opacity-[0.13] blur-[120px]
+          pointer-events-none
+        "
+      />
+      <div
+        aria-hidden="true"
+        className="
+          absolute bottom-[-15%] left-[-8%]
+          w-[500px] h-[500px] rounded-full
+          bg-gradient-to-tr from-[#FF8A00] to-[#FFB347]
+          opacity-[0.10] blur-[120px]
+          pointer-events-none
+        "
+      />
 
-      {/* Main Content Grid */}
-      <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
-        
-        {/* Left Headline Column */}
-        <div className="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+      {/* ─── Main 12-column grid ─────────────────────────────────── */}
+      <div className="container relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 items-center">
+
+          {/* ═══════════════════════════════════════════════════════
+              LEFT COLUMN — Typography block (7 cols)
+          ════════════════════════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex self-center lg:self-start items-center gap-2 px-3 py-1 rounded-full border border-primary/10 bg-primary/5 text-primary text-xs font-semibold tracking-wider uppercase animate-pulse"
+            ref={leftRef}
+            variants={containerVariants}
+            initial="hidden"
+            animate={leftInView ? "visible" : "hidden"}
+            className="lg:col-span-7 flex flex-col gap-7"
           >
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            Open for Opportunities
+            {/* Availability pill */}
+            <motion.div variants={itemVariants}>
+              <span className="section-label inline-flex items-center gap-2">
+                <span className="
+                  w-1.5 h-1.5 rounded-full bg-[#FF6B00]
+                  animate-pulse-slow
+                " />
+                Available for Work
+              </span>
+            </motion.div>
+
+            {/* Display heading */}
+            <motion.h1
+              variants={itemVariants}
+              className="display-1 text-[#111111] leading-[0.92]"
+            >
+              Building
+              <br />
+              <span className="text-gradient">Digital</span>
+              <br />
+              Experiences.
+            </motion.h1>
+
+            {/* Sub-copy */}
+            <motion.p
+              variants={itemVariants}
+              className="text-[#666666] text-lg leading-relaxed max-w-md"
+            >
+              Full Stack Developer &amp; AI Engineer based in India.
+              Crafting premium web apps, AI systems, and scalable
+              digital products.
+            </motion.p>
+
+            {/* CTA Row */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <button
+                onClick={() => handleScroll("projects")}
+                className="btn btn-primary cursor-none group"
+              >
+                View My Work
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </button>
+
+              <a
+                href="/resume.pdf"
+                download
+                className="btn btn-secondary cursor-none group"
+              >
+                Download CV
+                <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-200" />
+              </a>
+            </motion.div>
+
+            {/* Stats trust row */}
+            <motion.div
+              variants={itemVariants}
+              className="flex items-stretch gap-3 max-w-sm"
+            >
+              <StatCard value="30+"  label="Projects"      />
+              <StatCard value="15+"  label="Technologies"  />
+              <StatCard value="100%" label="Delivery"      />
+            </motion.div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-heading text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1]"
-          >
-            Hello, I&apos;m <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-black drop-shadow-[0_0_20px_rgba(255,107,0,0.15)]">
-              Aditya Prakash Dwivedi
-            </span>
-          </motion.h1>
-
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg sm:text-2xl text-slate-700 font-semibold h-8 min-h-[32px] flex items-center justify-center lg:justify-start"
-          >
-            I build next-generation&nbsp;
-            <span className="text-primary border-r-2 border-primary animate-pulse pr-1">
-              {currentText}
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm sm:text-base text-slate-500 max-w-xl leading-relaxed mx-auto lg:mx-0 font-sans"
-          >
-            Creating premium full stack web platforms, intelligent AI voice agents, and high-performance automation software that elevates businesses and developers.
-          </motion.p>
-
+          {/* ═══════════════════════════════════════════════════════
+              RIGHT COLUMN — Visual block (5 cols)
+          ════════════════════════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4"
+            ref={rightRef}
+            variants={rightVariants}
+            initial="hidden"
+            animate={rightInView ? "visible" : "hidden"}
+            className="lg:col-span-5 relative flex items-center justify-center"
           >
-            <button
-              onClick={() => handleScrollTo("projects")}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold text-sm tracking-wide shadow-[0_4px_25px_rgba(255,107,0,0.2)] hover:scale-105 transition-all duration-300 flex items-center gap-2 group cursor-pointer"
-            >
-              View Projects
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              onClick={() => handleScrollTo("contact")}
-              className="px-6 py-3 rounded-full glass-card hover:bg-primary/5 border border-black/5 hover:border-primary/20 text-slate-700 hover:text-primary font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
-            >
-              Hire Me
-              <Mail className="w-4 h-4 text-primary" />
-            </button>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full bg-black/5 hover:bg-black/10 border border-transparent text-slate-600 hover:text-slate-800 font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
-            >
-              Resume
-              <Download className="w-4 h-4" />
-            </a>
+            {/* Outer container — sets positioning context */}
+            <div className="relative w-[360px] h-[420px] sm:w-[400px] sm:h-[460px]">
+
+              {/* Large glowing orange orb background */}
+              <div
+                aria-hidden="true"
+                className="
+                  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                  w-72 h-72 sm:w-80 sm:h-80
+                  rounded-full
+                  bg-gradient-to-br from-[#FF6B00] to-[#FF8A00]
+                  opacity-90
+                  blur-[2px]
+                  animate-pulse-slow
+                  shadow-[0_0_80px_rgba(255,107,0,0.35)]
+                "
+              />
+
+              {/* Profile image with organic mask */}
+              <div
+                className="
+                  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[52%]
+                  w-64 h-72 sm:w-72 sm:h-80
+                  overflow-hidden
+                  z-10
+                "
+                style={{
+                  borderRadius: "60% 40% 55% 45% / 45% 55% 40% 60%",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/profile.jpg"
+                  alt="Aditya Prakash Dwivedi — Full Stack & AI Engineer"
+                  className="w-full h-full object-cover object-top"
+                  draggable={false}
+                />
+              </div>
+
+              {/* ── Floating card 1: Tech stack (top-left) ─────────── */}
+              <FloatCard
+                className="top-2 left-[-24px] sm:left-[-32px]"
+                delay={0}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="
+                    w-6 h-6 rounded-lg
+                    bg-gradient-to-br from-[#FF6B00] to-[#FF8A00]
+                    flex items-center justify-center
+                    text-white text-[10px] font-black
+                    flex-shrink-0
+                  ">
+                    ⚛
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-heading font-bold text-[#111111] whitespace-nowrap leading-tight">
+                      React · Next.js
+                    </div>
+                    <div className="text-[9px] text-[#999999] font-semibold uppercase tracking-wider">
+                      TypeScript
+                    </div>
+                  </div>
+                </div>
+              </FloatCard>
+
+              {/* ── Floating card 2: AI (bottom-right) ─────────────── */}
+              <FloatCard
+                className="bottom-6 right-[-20px] sm:right-[-28px]"
+                delay={0.8}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="
+                    w-7 h-7 rounded-xl
+                    bg-[#FFF4EE] border border-[#F1E4DA]
+                    flex items-center justify-center
+                    flex-shrink-0
+                  ">
+                    <Brain className="w-3.5 h-3.5 text-[#FF6B00]" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-heading font-bold text-[#111111] whitespace-nowrap leading-tight">
+                      AI &amp; Automation
+                    </div>
+                    <div className="text-[9px] text-[#999999] font-semibold uppercase tracking-wider">
+                      LLM · Voice Agents
+                    </div>
+                  </div>
+                </div>
+              </FloatCard>
+
+              {/* ── Floating card 3: Rating (right side) ────────────── */}
+              <FloatCard
+                className="top-[38%] right-[-36px] sm:right-[-48px]"
+                delay={1.5}
+              >
+                <div className="flex flex-col items-center gap-1">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-2.5 h-2.5 text-[#FF8A00] fill-[#FF8A00]"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-[10px] font-heading font-bold text-[#111111] whitespace-nowrap">
+                    5★ Client Rating
+                  </div>
+                </div>
+              </FloatCard>
+
+              {/* Subtle ring around the orb */}
+              <div
+                aria-hidden="true"
+                className="
+                  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                  w-[300px] h-[300px] sm:w-[340px] sm:h-[340px]
+                  rounded-full
+                  border border-[#FF6B00]/15
+                  pointer-events-none
+                  z-0
+                "
+              />
+            </div>
           </motion.div>
         </div>
-
-        {/* Right Terminal Column */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="lg:col-span-5 w-full flex justify-center"
-        >
-          {/* Glass Terminal container */}
-          <div className="w-full max-w-[450px] aspect-[4/3] rounded-3xl border border-black/5 glass-card bg-white/70 overflow-hidden shadow-2xl relative flex flex-col">
-            
-            {/* Terminal Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-black/5 bg-slate-50 select-none">
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-3 h-3 rounded-full bg-green-500/80" />
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-mono tracking-tight">
-                <TermIcon className="w-3 h-3 text-primary" />
-                aditya@shell:~
-              </div>
-              <span className="w-12" /> {/* spacing element */}
-            </div>
-
-            {/* Terminal Output Area */}
-            <div className="flex-1 overflow-y-auto p-4 font-mono text-xs space-y-2.5 terminal-scanline scrollbar-thin">
-              {terminalHistory.map((line, idx) => (
-                <div
-                  key={idx}
-                  className={`leading-relaxed break-words whitespace-pre-wrap ${
-                    line.type === "input"
-                      ? "text-primary font-bold"
-                      : line.type === "error"
-                      ? "text-red-600 font-bold"
-                      : line.type === "system"
-                      ? "text-purple-600 font-semibold"
-                      : "text-slate-700"
-                  }`}
-                >
-                  {line.text}
-                </div>
-              ))}
-              <div ref={consoleBottomRef} />
-            </div>
-
-            {/* Terminal Input Form */}
-            <form
-              onSubmit={handleTerminalSubmit}
-              className="flex items-center gap-2 p-3 border-t border-black/5 bg-slate-50/50"
-            >
-              <ChevronRight className="w-4 h-4 text-primary shrink-0" />
-              <input
-                id="terminal-cli-input"
-                type="text"
-                className="flex-1 bg-transparent border-none outline-none font-mono text-xs text-slate-800 placeholder-slate-400"
-                placeholder="Type 'help'..."
-                value={terminalInput}
-                onChange={(e) => setTerminalInput(e.target.value)}
-                autoComplete="off"
-                spellCheck="false"
-              />
-            </form>
-          </div>
-        </motion.div>
       </div>
 
-      {/* Floating details banner */}
+      {/* ─── Scroll indicator ─────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-6 flex items-center gap-8 text-[11px] uppercase font-bold tracking-widest text-slate-400 pointer-events-none select-none z-10"
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="
+          absolute bottom-8 left-1/2 -translate-x-1/2
+          flex flex-col items-center gap-1.5
+          z-10 pointer-events-none select-none
+        "
       >
-        <span>available worldwide</span>
-        <span>•</span>
-        <span>luxury experiences</span>
-        <span>•</span>
-        <span>ai automation</span>
+        <span className="label text-[#999999] text-[10px]">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 7, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-4 h-4 text-[#FF6B00]" />
+        </motion.div>
       </motion.div>
     </section>
   );

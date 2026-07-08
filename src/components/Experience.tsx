@@ -1,146 +1,266 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase, Calendar, CheckSquare } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-interface RoleExperience {
+interface ExperienceEntry {
   company: string;
   role: string;
-  duration: string;
-  location: string;
-  responsibilities: string[];
+  period: string;
+  year: string;
   achievements: string[];
+  side: "left" | "right";
+}
+
+const experiences: ExperienceEntry[] = [
+  {
+    company: "Freelance / Independent",
+    role: "Full Stack Developer & AI Engineer",
+    period: "2022 – Present",
+    year: "2022",
+    achievements: [
+      "Built 30+ web applications for clients worldwide",
+      "Developed AI voice agents and automation systems",
+      "Delivered HR tech, ecommerce, and SaaS products",
+    ],
+    side: "left",
+  },
+  {
+    company: "eHubInd Technologies",
+    role: "Lead Developer",
+    period: "2023 – 2024",
+    year: "2023",
+    achievements: [
+      "Led development of hyperlocal ecommerce platform",
+      "Architected vendor management and payment systems",
+      "Scaled platform to 1000+ users",
+    ],
+    side: "right",
+  },
+  {
+    company: "Tevatel",
+    role: "Software Engineer",
+    period: "2024 – Present",
+    year: "2024",
+    achievements: [
+      "Built enterprise telecom SaaS dashboard",
+      "Real-time WebSocket monitoring systems",
+      "PostgreSQL query optimization (60% faster)",
+    ],
+    side: "left",
+  },
+];
+
+function CardContent({ entry }: { entry: ExperienceEntry }) {
+  return (
+    <motion.div
+      whileHover={{
+        y: -4,
+        boxShadow:
+          "0 4px 16px rgba(255,107,0,0.08), 0 24px 64px rgba(255,107,0,0.06)",
+      }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      className="relative bg-white rounded-[32px] p-8 border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] overflow-hidden"
+    >
+      {/* Large faint year watermark */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute top-2 right-4 font-heading text-[#F1E4DA] select-none"
+        style={{ fontSize: 80, fontWeight: 300, lineHeight: 1 }}
+      >
+        {entry.year}
+      </span>
+
+      {/* Period */}
+      <span className="label text-[#999999] mb-3 block">{entry.period}</span>
+
+      {/* Company */}
+      <h3 className="heading-2 text-[#111111] mb-1 relative z-10">
+        {entry.company}
+      </h3>
+
+      {/* Role */}
+      <p className="text-[#FF6B00] font-bold text-lg mb-5 relative z-10">
+        {entry.role}
+      </p>
+
+      {/* Achievements */}
+      <ul className="space-y-2.5 relative z-10">
+        {entry.achievements.map((achievement, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <span className="flex-shrink-0 mt-[7px] w-[6px] h-[6px] rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00]" />
+            <span className="body-md text-[#666666] leading-relaxed">
+              {achievement}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Decorative corner accent */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#FFE8D6]/40 to-transparent rounded-[32px]" />
+    </motion.div>
+  );
+}
+
+function ExperienceCard({
+  entry,
+  index,
+}: {
+  entry: ExperienceEntry;
+  index: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isLeft = entry.side === "left";
+
+  return (
+    <div ref={ref} className="relative flex items-center w-full">
+      {/* ── Desktop: alternating left / right ── */}
+      <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] w-full items-center">
+        {/* Left slot */}
+        <div className="flex justify-end pr-10">
+          {isLeft && (
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              animate={
+                isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }
+              }
+              transition={{
+                duration: 0.7,
+                delay: index * 0.15,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="w-full max-w-[420px]"
+            >
+              <CardContent entry={entry} />
+            </motion.div>
+          )}
+        </div>
+
+        {/* Center node */}
+        <div className="flex items-center justify-center relative z-10 px-2">
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={
+              isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
+            }
+            transition={{
+              duration: 0.5,
+              delay: index * 0.15 + 0.2,
+              ease: "backOut",
+            }}
+            className="w-5 h-5 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00] shadow-[0_0_0_5px_#FFE8D6,0_0_0_8px_rgba(255,107,0,0.08)] flex-shrink-0"
+          />
+        </div>
+
+        {/* Right slot */}
+        <div className="flex justify-start pl-10">
+          {!isLeft && (
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              animate={
+                isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }
+              }
+              transition={{
+                duration: 0.7,
+                delay: index * 0.15,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="w-full max-w-[420px]"
+            >
+              <CardContent entry={entry} />
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Mobile: all right ── */}
+      <div className="flex md:hidden items-start gap-6 w-full">
+        <div className="flex-shrink-0 pt-10">
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={
+              isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
+            }
+            transition={{
+              duration: 0.5,
+              delay: index * 0.15 + 0.2,
+              ease: "backOut",
+            }}
+            className="w-5 h-5 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00] shadow-[0_0_0_4px_#FFE8D6]"
+          />
+        </div>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+          transition={{
+            duration: 0.6,
+            delay: index * 0.15,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="flex-1"
+        >
+          <CardContent entry={entry} />
+        </motion.div>
+      </div>
+    </div>
+  );
 }
 
 export default function Experience() {
-  const experiences: RoleExperience[] = [
-    {
-      company: "Tevatel Software Solutions",
-      role: "Full Stack Developer",
-      duration: "May 2026 - Present",
-      location: "India",
-      responsibilities: [
-        "Built and shipped full-stack features using React.js, TypeScript, Node.js, and REST APIs, contributing to a codebase serving production users.",
-        "Refactored reusable component architecture to improve page rendering speeds, reducing unnecessary re-renders.",
-        "Integrated and debugged third-party APIs, and improved error handling for routing modules.",
-      ],
-      achievements: [
-        "Improved frontend page load consistency and rendering speed across core application flows.",
-        "Implemented robust SEO optimizations, increasing discoverability across key application pages.",
-      ],
-    },
-    {
-      company: "Codingal",
-      role: "Software Developer Associate Intern",
-      duration: "Nov 2025 - Apr 2026",
-      location: "India",
-      responsibilities: [
-        "Enhanced live class features used by thousands of students, improving real-time interaction and session reliability.",
-        "Debugged and optimized frontend and backend code blocks, collaborating directly with the core engineering team.",
-        "Contributed to project-based learning module designs for programming courses.",
-      ],
-      achievements: [
-        "Significantly reduced reported student session bugs by writing clean, modular fixes.",
-      ],
-    },
-  ];
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="experience" className="relative py-24 px-6 md:px-12 w-full max-w-7xl mx-auto overflow-hidden">
-      
-      {/* Decorative Blob */}
-      <div className="absolute top-[30%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+    <section id="experience" className="section bg-white">
+      <div className="container">
+        {/* Header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={
+            headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+          }
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-20 flex flex-col items-center"
+        >
+          <span className="section-label">Career</span>
+          <h2 className="heading-1 text-[#111111] mt-4">
+            Where I&apos;ve Built
+          </h2>
+          <p className="body-lg text-[#666666] mt-4 max-w-xl">
+            A journey of building meaningful products across industries — from
+            startups to enterprise platforms.
+          </p>
+        </motion.div>
 
-      {/* Section Title */}
-      <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
-          Career Path
-        </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
-          Professional Work Experience
-        </p>
-        <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
-      </div>
+        {/* Timeline */}
+        <div className="relative">
+          {/* Dashed vertical line — desktop */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-px border-l-2 border-dashed border-[#FFE8D6] z-0"
+          />
+          {/* Dashed vertical line — mobile */}
+          <div
+            aria-hidden="true"
+            className="md:hidden absolute left-[10px] top-0 bottom-0 border-l-2 border-dashed border-[#FFE8D6] z-0"
+          />
 
-      {/* Timeline Layout */}
-      <div className="relative border-l border-black/10 pl-6 md:pl-10 space-y-12 py-2 max-w-4xl mx-auto">
-        {experiences.map((exp, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: idx * 0.15 }}
-            className="relative group"
-          >
-            {/* Timeline Circle Node */}
-            <div className="absolute -left-[35px] md:-left-[51px] top-2 w-[18px] h-[18px] md:w-[22px] md:h-[22px] rounded-full bg-white border-2 border-black/10 flex items-center justify-center group-hover:border-primary transition-colors z-10 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
+          {/* Entries */}
+          <div className="relative z-10 flex flex-col gap-14 md:gap-16">
+            {experiences.map((entry, index) => (
+              <ExperienceCard
+                key={entry.company}
+                entry={entry}
+                index={index}
+              />
+            ))}
+          </div>
 
-            {/* Experience Card */}
-            <div className="p-6 rounded-3xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 relative overflow-hidden">
-              
-              {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-6">
-                <div>
-                  <h3 className="font-heading text-lg sm:text-xl font-bold text-slate-800 group-hover:text-primary transition-colors">
-                    {exp.role}
-                  </h3>
-                  <p className="font-heading text-sm text-primary font-semibold mt-0.5">
-                    {exp.company}
-                  </p>
-                </div>
-                
-                <div className="flex flex-col sm:items-end text-xs text-slate-500 font-sans">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-500">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {exp.duration}
-                  </span>
-                  <span className="mt-0.5">{exp.location}</span>
-                </div>
-              </div>
-
-              {/* Grid Responsibilities and Achievements */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans text-xs sm:text-sm text-slate-500">
-                
-                {/* Responsibilities */}
-                <div>
-                  <h4 className="font-heading text-[10px] uppercase font-extrabold tracking-widest text-slate-500 mb-3 flex items-center gap-1.5">
-                    <Briefcase className="w-3.5 h-3.5 text-primary" />
-                    Core Responsibilities
-                  </h4>
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((resp, rIdx) => (
-                      <li key={rIdx} className="leading-relaxed flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                        <span>{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Achievements */}
-                <div>
-                  <h4 className="font-heading text-[10px] uppercase font-extrabold tracking-widest text-slate-500 mb-3 flex items-center gap-1.5">
-                    <CheckSquare className="w-3.5 h-3.5 text-secondary" />
-                    Key Achievements
-                  </h4>
-                  <ul className="space-y-2">
-                    {exp.achievements.map((ach, aIdx) => (
-                      <li key={aIdx} className="leading-relaxed flex items-start gap-2 text-slate-600">
-                        <span className="w-1.5 h-1.5 rounded bg-secondary mt-1.5 shrink-0" />
-                        <span>{ach}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-
-            </div>
-          </motion.div>
-        ))}
+          {/* Bottom cap dot */}
+          <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-[#FFE8D6] border-2 border-[#FF6B00]/30 z-10" />
+        </div>
       </div>
     </section>
   );

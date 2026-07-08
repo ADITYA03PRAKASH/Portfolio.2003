@@ -1,118 +1,147 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code2, BrainCircuit, Cpu, Settings2, BarChart3, LineChart } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Code2, Bot, BarChart3 } from "lucide-react";
 
-interface ServiceItem {
+interface ServiceCard {
   title: string;
+  description: string;
   icon: React.ReactNode;
-  desc: string;
-  tech: string[];
+  gradient: string;
+  iconBg: string;
+  learnMore: string;
 }
 
+const services: ServiceCard[] = [
+  {
+    title: "Web Development",
+    description:
+      "Full-stack web apps, SaaS products, and ecommerce platforms built with modern tech.",
+    icon: <Code2 className="w-8 h-8 text-[#FF6B00]" />,
+    gradient: "from-[#FF6B00]/10 to-[#FF8A00]/5",
+    iconBg: "border-[#FFE8D6]",
+    learnMore: "#contact",
+  },
+  {
+    title: "AI & Automation",
+    description:
+      "Voice agents, chatbots, ML pipelines, and workflow automation systems.",
+    icon: <Bot className="w-8 h-8 text-[#6366f1]" />,
+    gradient: "from-[#6366f1]/10 to-[#8b5cf6]/5",
+    iconBg: "border-[#e0e7ff]",
+    learnMore: "#contact",
+  },
+  {
+    title: "SaaS & Platforms",
+    description:
+      "End-to-end SaaS architectures, dashboards, analytics, and subscription systems.",
+    icon: <BarChart3 className="w-8 h-8 text-[#10b981]" />,
+    gradient: "from-[#10b981]/10 to-[#059669]/5",
+    iconBg: "border-[#d1fae5]",
+    learnMore: "#contact",
+  },
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
+};
+
 export default function Services() {
-  const services: ServiceItem[] = [
-    {
-      title: "Full Stack SaaS Apps",
-      icon: <Code2 className="w-6 h-6 text-cyan-400" />,
-      desc: "End-to-end development of scalable multi-tenant software as a service. Includes authentication, payment gateways, role management, and performance-tuned UI dashboards.",
-      tech: ["Next.js", "Node.js", "Prisma", "Postgres", "Stripe"],
-    },
-    {
-      title: "AI Voice & Dialog Systems",
-      icon: <BrainCircuit className="w-6 h-6 text-purple-400" />,
-      desc: "Engineering natural, low-latency voice assistants and smart support chatbots using generative LLM agents. Features real-time WebSocket communication and database tool calling.",
-      tech: ["OpenAI API", "WebSockets", "Twilio Streams", "Whisper"],
-    },
-    {
-      title: "Custom Automation Workflows",
-      icon: <Settings2 className="w-6 h-6 text-blue-400" />,
-      desc: "Optimizing company efficiency by connecting databases, CRM software, messaging clients, and web scraping hooks into automated workflows.",
-      tech: ["Python", "Docker", "Node.js", "Cron Jobs", "Webhooks"],
-    },
-    {
-      title: "Real-time Metrics Dashboards",
-      icon: <BarChart3 className="w-6 h-6 text-emerald-400" />,
-      desc: "Creating responsive data dashboards visualizing cloud server statistics, transaction histories, or threat vectors via persistent WebSocket push protocols.",
-      tech: ["React.js", "Chart.js/Recharts", "WebSockets", "SQL"],
-    },
-    {
-      title: "API Design & Backend Services",
-      icon: <Cpu className="w-6 h-6 text-amber-400" />,
-      desc: "Designing fast, secure, and fully documented REST and GraphQL interfaces. Includes database migration scripts, relational index tuning, and schema validations.",
-      tech: ["Express.js", "PostgreSQL", "Zod", "JWT Auth", "Postman"],
-    },
-    {
-      title: "E-Commerce Architectures",
-      icon: <LineChart className="w-6 h-6 text-rose-400" />,
-      desc: "Constructing custom multi-vendor online storefronts with cart persistence, real-time inventories, local delivery calculators, and checkout pathways.",
-      tech: ["React", "Redux Toolkit", "MongoDB", "Razorpay", "Tailwind"],
-    },
-  ];
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const gridRef = useRef(null);
+  const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
 
   return (
-    <section className="relative py-24 w-full bg-[#FFF8F2] border-y border-[#F2D6C2] overflow-hidden">
-      
-      {/* Decorative Blob */}
-      <div className="absolute top-[40%] left-[-10%] w-[30vw] h-[30vw] rounded-full bg-accent/5 blur-[100px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title */}
-        <div className="text-center mb-16 flex flex-col items-center">
-          <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
-            What I Offer
-          </h2>
-          <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
-            Professional Services & Solutions
+    <section id="services" className="section bg-[#FFF8F3]">
+      <div className="container">
+        {/* Header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-20 flex flex-col items-center"
+        >
+          <span className="section-label">What I Do</span>
+          <h2 className="heading-1 text-[#111111] mt-4">Services</h2>
+          <p className="body-lg text-[#666666] mt-4 max-w-xl">
+            From concept to deployment — I craft digital products that scale,
+            perform, and look exceptional.
           </p>
-          <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
-        </div>
+        </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((srv, idx) => (
+        {/* Cards Grid */}
+        <motion.div
+          ref={gridRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={gridInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {services.map((service, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-6 rounded-3xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between group h-full relative"
+              variants={cardVariants}
+              whileHover={{
+                y: -6,
+                boxShadow:
+                  "0 4px 16px rgba(255,107,0,0.08), 0 24px 64px rgba(255,107,0,0.06)",
+              }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className={`glass-card rounded-[40px] p-10 border border-[#F1E4DA] bg-gradient-to-br ${service.gradient} flex flex-col gap-6 relative overflow-hidden group`}
             >
-              {/* Background spotlight shine */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
+              {/* Decorative orb */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-12 -right-12 w-40 h-40 rounded-full bg-white/20 blur-2xl"
+              />
 
-              <div>
-                {/* Icon Container */}
-                <div className="p-3.5 rounded-xl bg-primary/5 border border-primary/10 w-fit mb-6 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-secondary/10 group-hover:border-primary/30 group-hover:scale-110 transition-all duration-300">
-                  {srv.icon}
-                </div>
+              {/* Icon container */}
+              <div
+                className={`w-16 h-16 rounded-[20px] bg-white shadow-sm border ${service.iconBg} p-4 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
+              >
+                {service.icon}
+              </div>
 
-                {/* Title */}
-                <h3 className="font-heading text-base font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors">
-                  {srv.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans mb-6">
-                  {srv.desc}
+              {/* Content */}
+              <div className="flex flex-col flex-1 gap-3">
+                <h3 className="heading-2 text-[#111111]">{service.title}</h3>
+                <p className="body-md text-[#666666] leading-relaxed flex-1">
+                  {service.description}
                 </p>
               </div>
 
-              {/* Badges footer */}
-              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-black/5">
-                {srv.tech.map((t, tIdx) => (
-                  <span
-                    key={tIdx}
-                    className="text-[9px] font-mono text-slate-600 group-hover:text-primary bg-slate-50 px-2 py-0.5 rounded border border-black/5 transition-colors"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+              {/* Learn more */}
+              <a
+                href={service.learnMore}
+                className="inline-flex items-center gap-2 text-[#FF6B00] font-bold text-sm tracking-wide cursor-none group/link"
+              >
+                <span className="group-hover/link:underline underline-offset-2">
+                  Learn more
+                </span>
+                <span className="transition-transform duration-200 group-hover/link:translate-x-1">
+                  →
+                </span>
+              </a>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
