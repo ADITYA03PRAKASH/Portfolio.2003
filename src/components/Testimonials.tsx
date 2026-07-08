@@ -73,7 +73,7 @@ export default function Testimonials() {
           {list.map((rev, idx) => (
             <div
               key={idx}
-              className="w-[280px] sm:w-[350px] shrink-0 p-6 rounded-2xl glass-card border border-black/5 bg-white/70 relative group transition-colors duration-300 hover:border-primary/20 shadow-sm shadow-orange-500/5"
+              className="w-[280px] sm:w-[350px] shrink-0 p-6 rounded-3xl glass-card border border-black/5 bg-white/70 relative group transition-colors duration-300 hover:border-primary/20 shadow-sm shadow-orange-500/5"
             >
               {/* Soft background light */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />

@@ -51,67 +51,68 @@ export default function Services() {
   ];
 
   return (
-    <section className="relative py-24 px-6 md:px-12 w-full max-w-7xl mx-auto overflow-hidden">
+    <section className="relative py-24 w-full bg-[#FFF8F2] border-y border-[#F2D6C2] overflow-hidden">
       
       {/* Decorative Blob */}
       <div className="absolute top-[40%] left-[-10%] w-[30vw] h-[30vw] rounded-full bg-accent/5 blur-[100px] pointer-events-none" />
 
-      {/* Title */}
-      <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
-          What I Offer
-        </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
-          Professional Services & Solutions
-        </p>
-        <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Title */}
+        <div className="text-center mb-16 flex flex-col items-center">
+          <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
+            What I Offer
+          </h2>
+          <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            Professional Services & Solutions
+          </p>
+          <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
+        </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((srv, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="p-6 rounded-2xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between group h-full relative"
-          >
-            {/* Background spotlight shine */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((srv, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="p-6 rounded-3xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between group h-full relative"
+            >
+              {/* Background spotlight shine */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
 
-            <div>
-              {/* Icon Container */}
-              <div className="p-3.5 rounded-xl bg-primary/5 border border-primary/10 w-fit mb-6 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-secondary/10 group-hover:border-primary/30 group-hover:scale-110 transition-all duration-300">
-                {srv.icon}
+              <div>
+                {/* Icon Container */}
+                <div className="p-3.5 rounded-xl bg-primary/5 border border-primary/10 w-fit mb-6 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-secondary/10 group-hover:border-primary/30 group-hover:scale-110 transition-all duration-300">
+                  {srv.icon}
+                </div>
+
+                {/* Title */}
+                <h3 className="font-heading text-base font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors">
+                  {srv.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans mb-6">
+                  {srv.desc}
+                </p>
               </div>
 
-              {/* Title */}
-              <h3 className="font-heading text-base font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors">
-                {srv.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans mb-6">
-                {srv.desc}
-              </p>
-            </div>
-
-            {/* Badges footer */}
-            <div className="flex flex-wrap gap-1.5 pt-4 border-t border-black/5">
-              {srv.tech.map((t, tIdx) => (
-                <span
-                  key={tIdx}
-                  className="text-[9px] font-mono text-slate-600 group-hover:text-primary bg-slate-50 px-2 py-0.5 rounded border border-black/5 transition-colors"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-          </motion.div>
-        ))}
+              {/* Badges footer */}
+              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-black/5">
+                {srv.tech.map((t, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="text-[9px] font-mono text-slate-600 group-hover:text-primary bg-slate-50 px-2 py-0.5 rounded border border-black/5 transition-colors"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

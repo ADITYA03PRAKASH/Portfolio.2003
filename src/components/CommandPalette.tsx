@@ -186,7 +186,7 @@ export default function CommandPalette() {
       <div
         ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-[550px] rounded-2xl border border-black/5 glass-card bg-white/95 overflow-hidden shadow-2xl relative"
+        className="w-full max-w-[550px] rounded-[32px] border border-black/5 glass-card bg-white/95 overflow-hidden shadow-2xl relative"
         onKeyDown={handleKeyDown}
       >
         {/* Glow overlay */}

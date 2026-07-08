@@ -147,111 +147,113 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-24 px-6 md:px-12 w-full max-w-7xl mx-auto overflow-hidden">
+    <section id="projects" className="relative py-24 w-full bg-[#FFF3E8] border-y border-[#F2D6C2] overflow-hidden">
       
       {/* Decorative Blob */}
       <div className="absolute top-[20%] left-[-15%] w-[40vw] h-[40vw] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
 
-      {/* Headline */}
-      <div className="text-center mb-12 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
-          Projects Portfolio
-        </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
-          Featured Engineering Works
-        </p>
-        <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Headline */}
+        <div className="text-center mb-12 flex flex-col items-center">
+          <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
+            Projects Portfolio
+          </h2>
+          <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            Featured Engineering Works
+          </p>
+          <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
+        </div>
 
-      {/* Filter Tabs */}
-      <div className="flex justify-center items-center gap-2 mb-12 flex-wrap">
-        {["All", "Full Stack", "AI & Automation", "Security"].map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-              filter === cat
-                ? "bg-primary/5 border border-primary/20 text-primary"
-                : "bg-black/5 border border-transparent text-slate-500 hover:text-slate-800"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+        {/* Filter Tabs */}
+        <div className="flex justify-center items-center gap-2 mb-12 flex-wrap">
+          {["All", "Full Stack", "AI & Automation", "Security"].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                filter === cat
+                  ? "bg-primary/5 border border-primary/20 text-primary"
+                  : "bg-black/5 border border-transparent text-slate-500 hover:text-slate-800"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((p) => {
-            let cardRef: HTMLDivElement | null = null;
-            return (
-              <motion.div
-                key={p.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="cursor-pointer"
-                onClick={() => setSelectedProject(p)}
-              >
-                {/* 3D Tilt Card wrapper */}
-                <div
-                  ref={(el) => { cardRef = el; }}
-                  onMouseMove={(e) => cardRef && handleMouseMove(e, cardRef)}
-                  onMouseLeave={() => cardRef && handleMouseLeave(cardRef)}
-                  style={{ transition: "transform 0.15s ease-out" }}
-                  className="rounded-2xl glass-card border border-black/5 bg-white/70 p-6 relative overflow-hidden flex flex-col h-full group"
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((p) => {
+              let cardRef: HTMLDivElement | null = null;
+              return (
+                <motion.div
+                  key={p.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  className="cursor-pointer"
+                  onClick={() => setSelectedProject(p)}
                 >
-                  {/* Subtle Gradient background blobs */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${p.gradient} pointer-events-none opacity-20`} />
+                  {/* 3D Tilt Card wrapper */}
+                  <div
+                    ref={(el) => { cardRef = el; }}
+                    onMouseMove={(e) => cardRef && handleMouseMove(e, cardRef)}
+                    onMouseLeave={() => cardRef && handleMouseLeave(cardRef)}
+                    style={{ transition: "transform 0.15s ease-out" }}
+                    className="rounded-3xl glass-card border border-black/5 bg-white/70 p-6 relative overflow-hidden flex flex-col h-full group"
+                  >
+                    {/* Subtle Gradient background blobs */}
+                    <div className={`absolute inset-0 bg-gradient-to-b ${p.gradient} pointer-events-none opacity-20`} />
 
-                  {/* Icon and Category */}
-                  <div className="flex items-center justify-between mb-6 z-10">
-                    <div className="p-3 rounded-xl bg-primary/5 border border-primary/10 group-hover:scale-110 transition-transform duration-300">
-                      {p.icon}
+                    {/* Icon and Category */}
+                    <div className="flex items-center justify-between mb-6 z-10">
+                      <div className="p-3 rounded-xl bg-primary/5 border border-primary/10 group-hover:scale-110 transition-transform duration-300">
+                        {p.icon}
+                      </div>
+                      <span className="text-[9px] uppercase font-extrabold tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/10">
+                        {p.category}
+                      </span>
                     </div>
-                    <span className="text-[9px] uppercase font-extrabold tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/10">
-                      {p.category}
-                    </span>
-                  </div>
 
-                  {/* Info */}
-                  <h3 className="font-heading text-lg font-bold text-slate-850 mb-2 group-hover:text-primary transition-colors z-10">
-                    {p.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-sans mb-6 flex-grow z-10">
-                    {p.desc}
-                  </p>
+                    {/* Info */}
+                    <h3 className="font-heading text-lg font-bold text-slate-850 mb-2 group-hover:text-primary transition-colors z-10">
+                      {p.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 leading-relaxed font-sans mb-6 flex-grow z-10">
+                      {p.desc}
+                    </p>
 
-                  {/* Tech stack badges */}
-                  <div className="flex flex-wrap gap-1.5 mb-6 z-10">
-                    {p.tech.slice(0, 4).map((t, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[9px] font-mono text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-black/5"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                    {p.tech.length > 4 && (
-                      <span className="text-[9px] font-mono text-slate-600 bg-slate-50 px-1.5 py-0.5 rounded border border-black/5">
-                        +{p.tech.length - 4}
-                      </span>
-                    )}
-                  </div>
+                    {/* Tech stack badges */}
+                    <div className="flex flex-wrap gap-1.5 mb-6 z-10">
+                      {p.tech.slice(0, 4).map((t, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[9px] font-mono text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-black/5"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                      {p.tech.length > 4 && (
+                        <span className="text-[9px] font-mono text-slate-600 bg-slate-50 px-1.5 py-0.5 rounded border border-black/5">
+                          +{p.tech.length - 4}
+                        </span>
+                      )}
+                    </div>
 
-                  {/* Hover indicator link */}
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-primary group-hover:translate-x-1.5 transition-transform z-10">
-                    View Details
-                    <Eye className="w-3.5 h-3.5" />
+                    {/* Hover indicator link */}
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-primary group-hover:translate-x-1.5 transition-transform z-10">
+                      View Details
+                      <Eye className="w-3.5 h-3.5" />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Modal Popup Overlay */}
@@ -267,7 +269,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.95, y: 30 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[700px] max-h-[85vh] rounded-2xl border border-black/5 glass-card bg-white/95 overflow-y-auto shadow-2xl relative p-6 sm:p-8 scrollbar-thin"
+              className="w-full max-w-[700px] max-h-[85vh] rounded-[32px] border border-black/5 glass-card bg-white/95 overflow-y-auto shadow-2xl relative p-6 sm:p-8 scrollbar-thin"
             >
               {/* Top gradient spotlight */}
               <div className={`absolute top-0 left-0 w-full h-40 bg-gradient-to-b ${selectedProject.gradient} pointer-events-none opacity-20`} />
@@ -282,7 +284,7 @@ export default function Projects() {
 
               {/* Header */}
               <div className="flex items-center gap-4 mb-6 z-10 relative mt-4">
-                <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10">
+                <div className="p-4 rounded-3xl bg-primary/5 border border-primary/10">
                   {selectedProject.icon}
                 </div>
                 <div>

@@ -144,7 +144,7 @@ export default function Contact() {
           </div>
 
           {/* Cyber Map mockup (styled grid container) */}
-          <div className="h-44 w-full rounded-2xl border border-black/5 glass-card relative overflow-hidden flex items-center justify-center bg-white/70 shadow-sm shadow-orange-500/5 select-none">
+          <div className="h-44 w-full rounded-3xl border border-black/5 glass-card relative overflow-hidden flex items-center justify-center bg-white/70 shadow-sm shadow-orange-500/5 select-none">
             {/* Mock coordinate grid overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,0,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,0,0.015)_1px,transparent_1px)] bg-[size:16px_16px]" />
             {/* Center target circle */}
@@ -164,7 +164,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Form Container */}
-        <div className="lg:col-span-7 w-full p-6 sm:p-8 rounded-2xl glass-card border border-black/5 bg-white/75 shadow-lg shadow-orange-500/5 relative">
+        <div className="lg:col-span-7 w-full p-6 sm:p-8 rounded-[32px] glass-card border border-black/5 bg-white/75 shadow-lg shadow-orange-500/5 relative">
           
           <h3 className="font-heading text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
             Send Message

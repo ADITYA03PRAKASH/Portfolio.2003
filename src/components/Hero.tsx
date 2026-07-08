@@ -225,7 +225,7 @@ export default function Hero() {
           className="lg:col-span-5 w-full flex justify-center"
         >
           {/* Glass Terminal container */}
-          <div className="w-full max-w-[450px] aspect-[4/3] rounded-2xl border border-black/5 glass-card bg-white/70 overflow-hidden shadow-2xl relative flex flex-col">
+          <div className="w-full max-w-[450px] aspect-[4/3] rounded-3xl border border-black/5 glass-card bg-white/70 overflow-hidden shadow-2xl relative flex flex-col">
             
             {/* Terminal Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-black/5 bg-slate-50 select-none">

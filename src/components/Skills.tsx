@@ -111,7 +111,7 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className={`group p-6 rounded-2xl glass-card border border-black/5 bg-white/75 ${category.color} transition-all duration-500 relative overflow-hidden`}
+            className={`group p-6 rounded-3xl glass-card border border-black/5 bg-white/75 ${category.color} transition-all duration-500 relative overflow-hidden`}
           >
             {/* Soft background light */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />

@@ -122,7 +122,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Navbar (Bottom Floating Dock) */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-[400px] z-40 md:hidden flex items-center justify-between bg-white/75 backdrop-blur-xl border border-black/5 px-4 py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-[400px] z-40 md:hidden flex items-center justify-between bg-white/75 backdrop-blur-xl border border-black/5 px-4 py-2.5 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
         <nav className="flex items-center justify-between w-full">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;

@@ -79,7 +79,7 @@ export default function Experience() {
             </div>
 
             {/* Experience Card */}
-            <div className="p-6 rounded-2xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 relative overflow-hidden">
+            <div className="p-6 rounded-3xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 relative overflow-hidden">
               
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-6">

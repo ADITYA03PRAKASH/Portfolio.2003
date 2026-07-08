@@ -94,7 +94,7 @@ export default function AIChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 right-6 w-[90%] max-w-[360px] h-[450px] rounded-2xl border border-black/5 glass-card bg-white/95 overflow-hidden shadow-2xl z-50 flex flex-col font-sans"
+            className="fixed bottom-24 right-6 w-[90%] max-w-[360px] h-[450px] rounded-[32px] border border-black/5 glass-card bg-white/95 overflow-hidden shadow-2xl z-50 flex flex-col font-sans"
           >
             {/* Window Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-black/5 bg-slate-50 select-none">
@@ -140,7 +140,7 @@ export default function AIChatWidget() {
                   </div>
                   
                   <div
-                    className={`p-3 rounded-2xl text-xs leading-relaxed ${
+                    className={`p-3 rounded-[20px] text-xs leading-relaxed ${
                       msg.sender === "user"
                         ? "bg-primary text-white rounded-tr-none shadow-sm shadow-orange-500/10"
                         : "bg-slate-550 bg-slate-50 border border-black/5 text-slate-700 rounded-tl-none"
@@ -156,7 +156,7 @@ export default function AIChatWidget() {
                   <div className="w-7 h-7 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center text-primary">
                     <Bot className="w-3.5 h-3.5" />
                   </div>
-                  <div className="bg-slate-50 border border-black/5 p-3 rounded-2xl rounded-tl-none flex items-center gap-1.5 h-8">
+                  <div className="bg-slate-50 border border-black/5 p-3 rounded-[20px] rounded-tl-none flex items-center gap-1.5 h-8">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0ms" }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: "150ms" }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }} />
