@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
 import MeshBackground from "@/components/MeshBackground";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -115,7 +114,6 @@ export default function Home() {
           className="relative flex flex-col min-h-screen"
         >
           <SmoothScroll />
-          <CustomCursor />
           <MeshBackground />
           <Navbar />
 

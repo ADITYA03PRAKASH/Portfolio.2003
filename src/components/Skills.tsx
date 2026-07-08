@@ -123,7 +123,7 @@ function SkillCard({ skill }: { skill: Skill }) {
         boxShadow:
           "0 4px 16px rgba(255,107,0,0.10),0 16px 40px rgba(255,107,0,0.07)",
       }}
-      className="group bg-white rounded-3xl p-6 border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] flex flex-col items-center gap-3 cursor-none transition-all duration-300 relative overflow-hidden"
+      className="group bg-white rounded-3xl p-6 border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] flex flex-col items-center gap-3 transition-all duration-300 relative overflow-hidden"
     >
       {/* Subtle orange glow on hover */}
       <div
@@ -189,7 +189,7 @@ function CategoryTab({
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.97 }}
       transition={{ duration: 0.18 }}
-      className="relative rounded-full px-5 py-2 text-[13px] font-heading font-bold cursor-none transition-colors duration-250 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00]"
+      className="relative rounded-full px-5 py-2 text-[13px] font-heading font-bold transition-colors duration-250 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00]"
       style={{
         background: active ? "#FF6B00" : "#FFF4EE",
         color: active ? "#FFFFFF" : "#666666",

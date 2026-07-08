@@ -58,7 +58,7 @@ export default function Footer() {
                 AD
               </span>
               <span className="font-heading font-bold text-lg text-[#111111] tracking-tight">
-                Aditya.dev
+                Aditya
               </span>
             </div>
             <p className="body-md text-[#666666] max-w-xs leading-relaxed">
@@ -84,7 +84,7 @@ export default function Footer() {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className="w-fit text-left text-sm font-semibold text-[#666666] hover:text-[#FF6B00] transition-colors duration-200 cursor-none"
+                  className="w-fit text-left text-sm font-semibold text-[#666666] hover:text-[#FF6B00] transition-colors duration-200"
                 >
                   {item.label}
                 </button>
@@ -100,7 +100,7 @@ export default function Footer() {
                 href="https://github.com/ADITYA03PRAKASH"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300 cursor-none"
+                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300"
                 aria-label="GitHub"
               >
                 <GithubIcon className="w-5 h-5" />
@@ -109,14 +109,14 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/aditya-prakash-dwivedi-839943320"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300 cursor-none"
+                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:adityaprakash112233@gmail.com"
-                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300 cursor-none"
+                className="w-11 h-11 rounded-full border border-[#F1E4DA] bg-white flex items-center justify-center text-[#666666] hover:text-[#FF6B00] hover:border-[#FF6B00] hover:shadow-[0_4px_12px_rgba(255,107,0,0.1)] transition-all duration-300"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
@@ -128,10 +128,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom micro info */}
-        <div className="border-t border-[#F1E4DA] mt-16 pt-8 text-center text-[11px] text-[#999999] tracking-wider uppercase font-semibold">
-          Handcrafted with Next.js, Framer Motion, and Tailwind CSS
-        </div>
+        {/* Divider line for spacing */}
+        <div className="border-t border-[#F1E4DA] mt-16" />
       </div>
 
       {/* Floating Scroll to Top Button */}
@@ -143,7 +141,7 @@ export default function Footer() {
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-[99] w-12 h-12 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00] text-white flex items-center justify-center shadow-[0_4px_16px_rgba(255,107,0,0.35)] hover:scale-110 transition-transform duration-200 cursor-none"
+            className="fixed bottom-8 right-8 z-[99] w-12 h-12 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00] text-white flex items-center justify-center shadow-[0_4px_16px_rgba(255,107,0,0.35)] hover:scale-110 transition-transform duration-200"
             aria-label="Scroll to top"
           >
             <ArrowUp className="w-5 h-5" />

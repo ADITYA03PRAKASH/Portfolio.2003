@@ -1,8 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink, GitBranch, ArrowUpRight, Sparkles } from "lucide-react";
+import {
+  ExternalLink,
+  GitBranch,
+  ArrowUpRight,
+  Sparkles,
+} from "lucide-react";
 
 /* ─── Types ─────────────────────────────────────────────────────── */
 interface Project {
@@ -14,6 +20,7 @@ interface Project {
   live: string;
   github: string;
   gradient: string;
+  image: string;
   featured?: boolean;
 }
 
@@ -22,53 +29,47 @@ const PROJECTS: Project[] = [
   {
     id: 1,
     number: "01",
-    title: "AI Voice Agent",
-    desc: "End-to-end AI voice agent system with real-time speech recognition, GPT-4 integration, and natural language understanding for automated customer support.",
-    tech: ["Python", "OpenAI", "FastAPI", "React", "WebRTC"],
-    live: "https://ehubind.com",
-    github: "#",
+    title: "Tevatel",
+    desc: "Built enterprise cloud communication platform modules including dynamic CMS, AI Voice Agent pages, feature management, blog system, webinar pages, brochure management, and responsive business interfaces.",
+    tech: ["React.js", "Next.js", "Node.js", "Express.js", "MySQL", "Tailwind CSS", "REST API"],
+    live: "https://tevatel.com/",
+    github: "https://github.com/ADITYA03PRAKASH",
     gradient: "from-[#FF6B00] via-[#FF8A00] to-[#FFB347]",
+    image: "/tevatel_logo.png",
     featured: true,
   },
   {
     id: 2,
     number: "02",
-    title: "HR Consultancy Platform",
-    desc: "Full-stack HR tech platform with candidate-job matching, automated screening, and recruiter dashboards. Serves 500+ active job seekers.",
-    tech: ["Next.js", "Node.js", "MongoDB", "TypeScript"],
-    live: "https://firstdoorhr.com",
-    github: "#",
+    title: "First Door HR Solutions",
+    desc: "Developed a premium corporate HR consultancy website featuring modern UI, responsive layouts, SEO optimization, reusable React components, and professional business branding.",
+    tech: ["React.js", "Tailwind CSS", "JavaScript", "Framer Motion", "Responsive Design", "SEO"],
+    live: "https://firstdoor.netlify.app",
+    github: "https://github.com/ADITYA03PRAKASH",
     gradient: "from-[#1a1a2e] via-[#16213e] to-[#0f3460]",
+    image: "/firstdoor_logo.jpg",
   },
   {
     id: 3,
     number: "03",
-    title: "eHubInd — Small Town Ecommerce",
-    desc: "Hyperlocal ecommerce platform connecting small-town vendors to consumers. Features OTP auth, cart system, and vendor panels.",
-    tech: ["React", "Express", "MongoDB", "Redux"],
-    live: "https://ehubind.com",
-    github: "#",
+    title: "EHubInd.com (EngineerHub)",
+    desc: "Designed and developed an engineering technology platform connecting engineers, architects, freelancers, and businesses through a modern digital ecosystem.",
+    tech: ["React.js", "Node.js", "Express.js", "Supabase", "Tailwind CSS", "REST API"],
+    live: "https://www.ehubind.com/",
+    github: "https://github.com/ADITYA03PRAKASH",
     gradient: "from-[#7C3AED] via-[#6D28D9] to-[#4C1D95]",
+    image: "/ehub_logo.jpg",
   },
   {
     id: 4,
     number: "04",
-    title: "Tevatel — Telecom SaaS",
-    desc: "Enterprise telecom SaaS dashboard with real-time call monitoring, analytics, and automated reporting.",
-    tech: ["Next.js", "Python", "PostgreSQL", "WebSocket"],
-    live: "https://tevatel.com",
-    github: "#",
+    title: "Smart Task Manager",
+    desc: "Built a full-stack task management application featuring authentication, project organization, task tracking, deadlines, priority management, and an intuitive productivity dashboard.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB/MySQL", "JWT Authentication", "Tailwind CSS"],
+    live: "https://github.com/ADITYA03PRAKASH/Smart-Task-Manager-MERN-",
+    github: "https://github.com/ADITYA03PRAKASH/Smart-Task-Manager-MERN-",
     gradient: "from-[#0f2027] via-[#203a43] to-[#2c5364]",
-  },
-  {
-    id: 5,
-    number: "05",
-    title: "Threat Monitoring Dashboard",
-    desc: "Real-time cybersecurity threat monitoring dashboard with ML-based anomaly detection and automated alert system.",
-    tech: ["React", "Python", "TensorFlow", "Redis"],
-    live: "#",
-    github: "#",
-    gradient: "from-[#1a1a1a] via-[#2d1515] to-[#4a1515]",
+    image: "/smart_task_logo.jpg",
   },
 ];
 
@@ -77,8 +78,8 @@ function ProjectImagePlaceholder({ project }: { project: Project }) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className="relative aspect-[16/10] rounded-3xl overflow-hidden cursor-none"
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+      className="relative aspect-[16/10] rounded-3xl overflow-hidden"
       style={{
         boxShadow:
           "0 2px 8px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.15)",
@@ -119,16 +120,27 @@ function ProjectImagePlaceholder({ project }: { project: Project }) {
 
       {/* Centered content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
+        {/* Project Logo Image */}
+        <div className="mb-4 w-20 h-20 rounded-2xl bg-white border border-[#F1E4DA] p-2 flex items-center justify-center shadow-lg relative overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={80}
+            height={80}
+            className="object-contain w-full h-full"
+            priority={project.featured}
+          />
+        </div>
         <p
-          className="font-body font-bold uppercase tracking-[0.2em] mb-3"
-          style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}
+          className="font-body font-bold uppercase tracking-[0.2em] mb-2"
+          style={{ fontSize: 10, color: "rgba(255,255,255,0.5)" }}
         >
           Project {project.number}
         </p>
         <h3
           className="font-heading font-black text-white drop-shadow-lg"
           style={{
-            fontSize: "clamp(20px, 3vw, 38px)",
+            fontSize: "clamp(18px, 2.5vw, 32px)",
             letterSpacing: "-0.025em",
             lineHeight: 1.15,
           }}
@@ -269,7 +281,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 font-heading font-bold text-sm cursor-none"
+            className="group inline-flex items-center gap-1.5 font-heading font-bold text-sm"
             style={{ color: "#FF6B00" }}
           >
             <span className="relative">
@@ -286,7 +298,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 font-heading font-bold text-sm cursor-none"
+            className="group inline-flex items-center gap-1.5 font-heading font-bold text-sm"
             style={{ color: "#FF6B00" }}
           >
             <span className="relative">
@@ -406,12 +418,12 @@ export default function Projects() {
             href="https://github.com/ADITYA03PRAKASH"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary cursor-none group"
+            className="btn btn-primary group"
           >
             View All on GitHub
             <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-          <a href="#contact" className="btn btn-secondary cursor-none">
+          <a href="#contact" className="btn btn-secondary">
             Let&apos;s Build Together →
           </a>
         </motion.div>

@@ -1,17 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, CheckCircle2, Send } from "lucide-react";
-
-interface ContactFormValues {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+import { Mail } from "lucide-react";
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -31,24 +22,6 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const [submitted, setSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ContactFormValues>();
-
-  const onSubmit = async (data: ContactFormValues) => {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1200));
-    setIsLoading(false);
-    setSubmitted(true);
-    reset();
-  };
 
   return (
     <section
@@ -115,120 +88,61 @@ export default function Contact() {
               Something Great
             </h2>
             <p className="text-white/75 text-lg mt-4 leading-relaxed">
-              Have a project in mind? I&apos;m available for freelance, contracts, and full-time roles.
+              Interested in collaborating or discussing job opportunities? Let&apos;s connect!
             </p>
           </motion.div>
 
-          {/* Form Card */}
+          {/* LinkedIn Contact Card */}
           <motion.div
             initial={{ opacity: 0, y: 48, scale: 0.97 }}
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-white rounded-[40px] p-8 md:p-10"
+            className="bg-white rounded-[40px] p-8 md:p-12 text-center flex flex-col items-center gap-6"
             style={{ boxShadow: "0 24px 80px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08)" }}
           >
-            {submitted ? (
-              /* Success State */
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col items-center justify-center py-12 gap-5 text-center"
-              >
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #FF6B00, #FF8A00)" }}
-                >
-                  <CheckCircle2 className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="heading-2 text-[#111111]">Message Sent!</h3>
-                <p className="body-md text-[#666666] max-w-sm">
-                  Thanks for reaching out. I&apos;ll get back to you within 24 hours.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="btn btn-primary cursor-none mt-2"
-                >
-                  Send Another
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5" noValidate>
-                {/* Row 1: Name + Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <input
-                      {...register("name", { required: "Name is required" })}
-                      placeholder="Your Name"
-                      className="w-full rounded-2xl border border-[#F1E4DA] bg-[#FFF8F3] px-4 py-3.5 text-[#111111] placeholder-[#999999] focus:border-[#FF6B00] focus:outline-none focus:bg-white text-sm font-body transition-all duration-200"
-                    />
-                    {errors.name && (
-                      <p className="mt-1.5 text-xs text-[#FF6B00] pl-1">{errors.name.message}</p>
-                    )}
-                  </div>
-                  <div>
-                    <input
-                      {...register("email", {
-                        required: "Email is required",
-                        pattern: { value: /^\S+@\S+\.\S+$/, message: "Enter a valid email" },
-                      })}
-                      type="email"
-                      placeholder="Email Address"
-                      className="w-full rounded-2xl border border-[#F1E4DA] bg-[#FFF8F3] px-4 py-3.5 text-[#111111] placeholder-[#999999] focus:border-[#FF6B00] focus:outline-none focus:bg-white text-sm font-body transition-all duration-200"
-                    />
-                    {errors.email && (
-                      <p className="mt-1.5 text-xs text-[#FF6B00] pl-1">{errors.email.message}</p>
-                    )}
-                  </div>
-                </div>
+            <div className="w-16 h-16 rounded-full bg-[#FFF4EE] flex items-center justify-center border border-[#F1E4DA]">
+              <LinkedinIcon className="w-8 h-8 text-[#FF6B00]" />
+            </div>
 
-                {/* Subject */}
-                <div>
-                  <input
-                    {...register("subject", { required: "Subject is required" })}
-                    placeholder="What's this about?"
-                    className="w-full rounded-2xl border border-[#F1E4DA] bg-[#FFF8F3] px-4 py-3.5 text-[#111111] placeholder-[#999999] focus:border-[#FF6B00] focus:outline-none focus:bg-white text-sm font-body transition-all duration-200"
-                  />
-                  {errors.subject && (
-                    <p className="mt-1.5 text-xs text-[#FF6B00] pl-1">{errors.subject.message}</p>
-                  )}
-                </div>
+            <div className="flex flex-col gap-3 max-w-lg">
+              <h3 className="font-heading font-black text-2xl md:text-3xl text-[#111111] tracking-tight">
+                Let&apos;s Connect on LinkedIn
+              </h3>
+              <p className="body-md text-[#666666] leading-relaxed">
+                Looking for a Full Stack Developer or interested in collaborating on a project? Feel free to connect with me on LinkedIn. I&apos;m always open to discussing job opportunities, freelance work, internships, and exciting tech projects.
+              </p>
+            </div>
 
-                {/* Message */}
-                <div>
-                  <textarea
-                    {...register("message", { required: "Please write a message" })}
-                    placeholder="Tell me about your project..."
-                    rows={5}
-                    className="w-full rounded-2xl border border-[#F1E4DA] bg-[#FFF8F3] px-4 py-3.5 text-[#111111] placeholder-[#999999] focus:border-[#FF6B00] focus:outline-none focus:bg-white text-sm font-body resize-none transition-all duration-200"
-                  />
-                  {errors.message && (
-                    <p className="mt-1.5 text-xs text-[#FF6B00] pl-1">{errors.message.message}</p>
-                  )}
-                </div>
+            <a
+              href="https://www.linkedin.com/in/aditya-prakash-dwivedi-839943320"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full sm:w-auto justify-center px-8 py-4 text-base font-bold flex items-center gap-2 group shadow-[0_4px_16px_rgba(255,107,0,0.25)] hover:shadow-[0_8px_24px_rgba(255,107,0,0.4)]"
+            >
+              <span>💼 Connect on LinkedIn</span>
+            </a>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="btn btn-primary w-full justify-center cursor-none py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? (
-                    <>
-                      <span
-                        className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin"
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+            {/* Professional Info Card Divider */}
+            <div className="w-full h-px bg-[#F1E4DA] my-2" />
+
+            {/* Professional Info Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full text-left sm:text-center">
+              <div className="bg-[#FFF8F3] border border-[#F1E4DA] rounded-2xl p-4 flex flex-col gap-1 items-start sm:items-center justify-center">
+                <span className="text-lg">📍</span>
+                <span className="text-xs font-semibold text-[#666666] uppercase tracking-wider">Location</span>
+                <span className="text-sm font-bold text-[#111111]">India</span>
+              </div>
+              <div className="bg-[#FFF8F3] border border-[#F1E4DA] rounded-2xl p-4 flex flex-col gap-1 items-start sm:items-center justify-center">
+                <span className="text-lg">💼</span>
+                <span className="text-xs font-semibold text-[#666666] uppercase tracking-wider">Role</span>
+                <span className="text-sm font-bold text-[#111111] whitespace-nowrap">Full Stack Developer</span>
+              </div>
+              <div className="bg-[#FFF8F3] border border-[#F1E4DA] rounded-2xl p-4 flex flex-col gap-1 items-start sm:items-center justify-center">
+                <span className="text-lg">🚀</span>
+                <span className="text-xs font-semibold text-[#666666] uppercase tracking-wider">Status</span>
+                <span className="text-sm font-bold text-[#111111] leading-tight">Open to Jobs &amp; Freelance</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Contact Links */}
@@ -240,7 +154,7 @@ export default function Contact() {
           >
             <a
               href="mailto:adityaprakash112233@gmail.com"
-              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200 cursor-none"
+              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200"
             >
               <Mail className="w-4 h-4" />
               adityaprakash112233@gmail.com
@@ -250,7 +164,7 @@ export default function Contact() {
               href="https://github.com/ADITYA03PRAKASH"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200 cursor-none"
+              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200"
             >
               <GithubIcon className="w-4 h-4" />
               ADITYA03PRAKASH
@@ -260,7 +174,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/aditya-prakash-dwivedi-839943320"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200 cursor-none"
+              className="flex items-center gap-2 text-white/80 hover:text-white font-body text-sm transition-colors duration-200"
             >
               <LinkedinIcon className="w-4 h-4" />
               LinkedIn

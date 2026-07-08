@@ -186,9 +186,7 @@ export default function Hero() {
               variants={itemVariants}
               className="text-[#666666] text-lg leading-relaxed max-w-md"
             >
-              Full Stack Developer &amp; AI Engineer based in India.
-              Crafting premium web apps, AI systems, and scalable
-              digital products.
+              I&apos;m Aditya Prakash, a Full Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. I build scalable business websites, SaaS platforms, admin dashboards, and productivity applications with a strong focus on performance, clean architecture, and exceptional user experience.
             </motion.p>
 
             {/* CTA Row */}
@@ -198,16 +196,17 @@ export default function Hero() {
             >
               <button
                 onClick={() => handleScroll("projects")}
-                className="btn btn-primary cursor-none group"
+                className="btn btn-primary group"
               >
                 View My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
 
               <a
-                href="/resume.pdf"
-                download
-                className="btn btn-secondary cursor-none group"
+                href="/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary group"
               >
                 Download CV
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-200" />
@@ -219,7 +218,7 @@ export default function Hero() {
               variants={itemVariants}
               className="flex items-stretch gap-3 max-w-sm"
             >
-              <StatCard value="30+"  label="Projects"      />
+              <StatCard value="5+"   label="Projects"      />
               <StatCard value="15+"  label="Technologies"  />
               <StatCard value="100%" label="Delivery"      />
             </motion.div>
@@ -253,22 +252,22 @@ export default function Hero() {
                 "
               />
 
-              {/* Profile image with organic mask */}
+              {/* Profile image with perfectly circular mask */}
               <div
                 className="
-                  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[52%]
-                  w-64 h-72 sm:w-72 sm:h-80
+                  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50%]
+                  w-64 h-64 sm:w-72 sm:h-72
                   overflow-hidden
+                  rounded-full
                   z-10
+                  border-4 border-white
+                  shadow-md
                 "
-                style={{
-                  borderRadius: "60% 40% 55% 45% / 45% 55% 40% 60%",
-                }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/profile.jpg"
-                  alt="Aditya Prakash Dwivedi — Full Stack & AI Engineer"
+                  alt="Aditya Prakash Dwivedi — Full Stack Developer"
                   className="w-full h-full object-cover object-top"
                   draggable={false}
                 />
@@ -316,10 +315,10 @@ export default function Hero() {
                   </div>
                   <div>
                     <div className="text-[11px] font-heading font-bold text-[#111111] whitespace-nowrap leading-tight">
-                      AI &amp; Automation
+                      AI Integration
                     </div>
                     <div className="text-[9px] text-[#999999] font-semibold uppercase tracking-wider">
-                      LLM · Voice Agents
+                      Automation · APIs
                     </div>
                   </div>
                 </div>

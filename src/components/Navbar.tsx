@@ -96,7 +96,7 @@ export default function Navbar() {
         {/* Logo */}
         <button
           onClick={() => scrollTo("home")}
-          className="flex items-center gap-2 pl-1 pr-3 cursor-none group"
+          className="flex items-center gap-2 pl-1 pr-3 group"
           aria-label="Go to top"
         >
           <span
@@ -122,7 +122,7 @@ export default function Navbar() {
               transition-colors duration-300
             "
           >
-            Aditya.dev
+            Aditya
           </span>
         </button>
 
@@ -141,7 +141,6 @@ export default function Navbar() {
                   relative px-3.5 py-2 rounded-full
                   text-[13px] font-semibold
                   transition-all duration-300
-                  cursor-none
                   ${isActive
                     ? "text-[#FF6B00]"
                     : "text-[#666666] hover:text-[#111111]"
@@ -190,7 +189,6 @@ export default function Navbar() {
             hover:shadow-[0_6px_20px_rgba(255,107,0,0.4)]
             hover:scale-[1.03]
             transition-all duration-300
-            cursor-none
             select-none
             mr-1
           "
@@ -218,7 +216,7 @@ export default function Navbar() {
         {/* Mobile Logo */}
         <button
           onClick={() => scrollTo("home")}
-          className="flex items-center gap-2 cursor-none"
+          className="flex items-center gap-2"
           aria-label="Go to top"
         >
           <span
@@ -233,7 +231,7 @@ export default function Navbar() {
             AD
           </span>
           <span className="font-heading font-bold text-sm text-[#111111]">
-            Aditya.dev
+            Aditya
           </span>
         </button>
 
@@ -247,7 +245,6 @@ export default function Navbar() {
             text-[#FF6B00]
             transition-all duration-200
             hover:bg-[#FFE8D6]
-            cursor-none
           "
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
@@ -323,7 +320,6 @@ export default function Navbar() {
                       w-full px-5 py-4 rounded-2xl
                       text-left font-heading font-semibold text-base
                       transition-all duration-200
-                      cursor-none
                       ${isActive
                         ? "bg-[#FFE8D6] text-[#FF6B00]"
                         : "text-[#666666] hover:bg-[#FFF4EE] hover:text-[#111111]"
@@ -354,7 +350,6 @@ export default function Navbar() {
                   py-4 px-8
                   font-bold font-heading text-base
                   shadow-[0_4px_16px_rgba(255,107,0,0.3)]
-                  cursor-none
                   mt-1
                 "
               >

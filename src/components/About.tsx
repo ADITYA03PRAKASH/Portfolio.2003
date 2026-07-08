@@ -12,17 +12,9 @@ import {
 /* ─── Data ─────────────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "30+", label: "Projects Delivered" },
+  { value: "5+", label: "Projects Delivered" },
   { value: "15+", label: "Technologies Mastered" },
-  { value: "3+",  label: "Years Experience" },
-];
-
-const milestones = [
-  { year: "2021", event: "Started coding", detail: "First lines of HTML & JavaScript" },
-  { year: "2022", event: "First freelance project", detail: "Delivered client website end-to-end" },
-  { year: "2023", event: "Built HR Tech platform", detail: "Full-stack SaaS with AI matching" },
-  { year: "2024", event: "AI Voice Agent", detail: "LLM-powered conversational bots" },
-  { year: "2025", event: "Enterprise SaaS", detail: "Scaled multi-tenant architecture" },
+  { value: "100%", label: "Delivery Rate" },
 ];
 
 /* ─── Animation Variants ────────────────────────────────────────────── */
@@ -76,7 +68,7 @@ function StatCard({
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       whileHover={{ y: -6, boxShadow: "0 4px 16px rgba(255,107,0,0.08),0 24px 64px rgba(255,107,0,0.06)" }}
-      className="bg-white rounded-3xl p-6 border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] flex flex-col items-center gap-1 cursor-none transition-shadow duration-300"
+      className="bg-white rounded-3xl p-6 border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] flex flex-col items-center gap-1 transition-shadow duration-300"
     >
       <span
         className="text-gradient font-heading font-black"
@@ -85,60 +77,6 @@ function StatCard({
         {value}
       </span>
       <span className="label text-[#999999] text-center mt-1">{label}</span>
-    </motion.div>
-  );
-}
-
-function TimelineItem({
-  year,
-  event,
-  detail,
-  index,
-  isLast,
-}: {
-  year: string;
-  event: string;
-  detail: string;
-  index: number;
-  isLast: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col items-center min-w-[180px] flex-shrink-0 relative group"
-    >
-      {/* Connector line */}
-      {!isLast && (
-        <div
-          aria-hidden
-          className="absolute top-[18px] left-[calc(50%+20px)] h-[2px] bg-[#F1E4DA] group-hover:bg-[#FFE8D6] transition-colors duration-500"
-          style={{ width: "calc(100% - 20px)" }}
-        />
-      )}
-
-      {/* Year dot */}
-      <div className="relative z-10 w-9 h-9 rounded-full bg-white border-2 border-[#F1E4DA] flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:border-[#FF6B00] transition-colors duration-300">
-        <div className="w-3 h-3 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </div>
-
-      {/* Content */}
-      <div className="mt-4 text-center px-2">
-        <span className="font-heading font-black text-[#FF6B00] text-sm block">
-          {year}
-        </span>
-        <span className="font-heading font-bold text-[#111111] text-sm block mt-0.5 leading-tight">
-          {event}
-        </span>
-        <span className="text-[11px] text-[#999999] block mt-1 leading-snug">
-          {detail}
-        </span>
-      </div>
     </motion.div>
   );
 }
@@ -323,19 +261,15 @@ export default function About() {
             </h2>
 
             <p className="body-lg">
-              I started writing code out of sheer curiosity — just a browser console
-              and a dream. That curiosity grew into a craft. Today I architect
-              production-grade web applications, AI-powered systems, and SaaS products
-              that serve real users at scale. Every interface I ship is obsessed with
-              performance, accessibility, and visual polish.
+              I started learning web development out of curiosity—with nothing more than a browser, VS Code, and a passion for building things. What began as experimenting with HTML, CSS, and JavaScript has grown into developing modern web applications used by real businesses.
             </p>
 
             <p className="body-lg">
-              My work spans the full spectrum — from pixel-perfect React frontends to
-              distributed Node.js microservices, from fine-tuned LLM pipelines to
-              enterprise HR platforms that automate thousands of decisions daily.
-              I believe the best software is invisible: it simply&nbsp;
-              <em style={{ color: "#FF6B00", fontStyle: "italic" }}>works beautifully</em>.
+              Today, I build responsive React and Next.js applications, full-stack SaaS products, business websites, admin dashboards, and AI-powered solutions that focus on performance, scalability, and user experience. I enjoy transforming business ideas into clean, intuitive interfaces backed by reliable APIs.
+            </p>
+
+            <p className="body-lg">
+              From corporate HR platforms and cloud communication websites to engineering marketplaces and productivity applications, every project helps me grow as a Full Stack Developer. My goal is simple: build software that is fast, reliable, scalable, and genuinely useful.
             </p>
 
             {/* Stat cards row */}
@@ -346,45 +280,6 @@ export default function About() {
             </div>
           </motion.div>
         </div>
-
-        {/* ══════════════════════════════════════════════════════════
-            HORIZONTAL TIMELINE
-        ══════════════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Label */}
-          <div className="flex flex-col items-center mb-10 gap-3">
-            <span className="section-label">Journey</span>
-            <p className="heading-2 text-[#111111] text-center">Key Milestones</p>
-          </div>
-
-          {/* Timeline scrollable card */}
-          <div
-            className="relative bg-white rounded-[32px] border border-[#F1E4DA] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.05)] overflow-x-auto"
-            style={{ scrollbarWidth: "none" }}
-          >
-            {/* Horizontal rule beneath dots */}
-            <div
-              aria-hidden
-              className="absolute top-[52px] left-10 right-10 h-[2px] bg-[#F1E4DA] pointer-events-none"
-            />
-
-            <div className="flex items-start gap-0 px-10 py-10 min-w-max">
-              {milestones.map((m, i) => (
-                <TimelineItem
-                  key={m.year}
-                  {...m}
-                  index={i}
-                  isLast={i === milestones.length - 1}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
       </div>
 

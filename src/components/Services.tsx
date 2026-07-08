@@ -130,7 +130,7 @@ export default function Services() {
               {/* Learn more */}
               <a
                 href={service.learnMore}
-                className="inline-flex items-center gap-2 text-[#FF6B00] font-bold text-sm tracking-wide cursor-none group/link"
+                className="inline-flex items-center gap-2 text-[#FF6B00] font-bold text-sm tracking-wide group/link"
               >
                 <span className="group-hover/link:underline underline-offset-2">
                   Learn more

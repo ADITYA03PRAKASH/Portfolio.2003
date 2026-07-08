@@ -14,40 +14,31 @@ interface ExperienceEntry {
 
 const experiences: ExperienceEntry[] = [
   {
-    company: "Freelance / Independent",
-    role: "Full Stack Developer & AI Engineer",
-    period: "2022 – Present",
-    year: "2022",
+    company: "EHubInd.com (EngineerHub)",
+    role: "Founder & Full Stack Developer",
+    period: "2026 – Present",
+    year: "2026",
     achievements: [
-      "Built 30+ web applications for clients worldwide",
-      "Developed AI voice agents and automation systems",
-      "Delivered HR tech, ecommerce, and SaaS products",
+      "Founded eHubInd.com, a digital platform connecting civil engineers, architects, freelancers, students, and businesses within a unified engineering ecosystem.",
+      "Developed features for freelance project discovery, internship opportunities, engineering services, and professional networking.",
+      "Built a scalable full-stack platform enabling businesses to hire skilled professionals and collaborate on engineering and construction projects.",
+      "Designed and implemented responsive user interfaces, secure backend APIs, and modern database architecture using React.js, Next.js, Node.js, Express.js, Tailwind CSS, and SQL databases.",
     ],
     side: "left",
-  },
-  {
-    company: "eHubInd Technologies",
-    role: "Lead Developer",
-    period: "2023 – 2024",
-    year: "2023",
-    achievements: [
-      "Led development of hyperlocal ecommerce platform",
-      "Architected vendor management and payment systems",
-      "Scaled platform to 1000+ users",
-    ],
-    side: "right",
   },
   {
     company: "Tevatel",
-    role: "Software Engineer",
-    period: "2024 – Present",
-    year: "2024",
+    role: "Full Stack Developer",
+    period: "2026 – Present",
+    year: "2026",
     achievements: [
-      "Built enterprise telecom SaaS dashboard",
-      "Real-time WebSocket monitoring systems",
-      "PostgreSQL query optimization (60% faster)",
+      "Developed and enhanced enterprise cloud communication platform features.",
+      "Built dynamic CMS modules, feature pages, blogs, webinar pages, and reusable React components.",
+      "Integrated REST APIs and optimized frontend performance for better user experience.",
+      "Worked with React.js, Next.js, Node.js, Express.js, MySQL, and Tailwind CSS.",
+      "Contributed to production deployments, debugging, feature enhancements, and performance improvements.",
     ],
-    side: "left",
+    side: "right",
   },
 ];
 
