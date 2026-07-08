@@ -53,10 +53,10 @@ export default function Testimonials() {
 
       {/* Title */}
       <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-cyan-400 mb-2">
+        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
           Testimonials
         </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-100">
+        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
           Client & Partner Reviews
         </p>
         <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
@@ -73,7 +73,7 @@ export default function Testimonials() {
           {list.map((rev, idx) => (
             <div
               key={idx}
-              className="w-[280px] sm:w-[350px] shrink-0 p-6 rounded-2xl glass-card border border-white/5 bg-slate-950/40 relative group transition-colors duration-300 hover:border-cyan-500/20"
+              className="w-[280px] sm:w-[350px] shrink-0 p-6 rounded-2xl glass-card border border-black/5 bg-white/70 relative group transition-colors duration-300 hover:border-primary/20 shadow-sm shadow-orange-500/5"
             >
               {/* Soft background light */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
@@ -81,23 +81,23 @@ export default function Testimonials() {
               {/* Star Rating */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: rev.rating }).map((_, rIdx) => (
-                  <Star key={rIdx} className="w-3.5 h-3.5 fill-cyan-400 text-cyan-400" />
+                  <Star key={rIdx} className="w-3.5 h-3.5 fill-primary text-primary" />
                 ))}
               </div>
 
               {/* Feedback text */}
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans mb-6 italic">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans mb-6 italic">
                 &ldquo;{rev.feedback}&rdquo;
               </p>
 
               {/* User info */}
-              <div className="flex items-center gap-3 pt-4 border-t border-white/5">
+              <div className="flex items-center gap-3 pt-4 border-t border-black/5">
                 {/* Initials placeholder avatar */}
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 border border-white/10 flex items-center justify-center font-heading font-black text-xs text-cyan-200">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 border border-primary/10 flex items-center justify-center font-heading font-black text-xs text-primary">
                   {rev.name.split(" ").map(n => n[0]).join("")}
                 </div>
                 <div>
-                  <h4 className="font-heading text-xs font-bold text-slate-200">
+                  <h4 className="font-heading text-xs font-bold text-slate-800">
                     {rev.name}
                   </h4>
                   <p className="text-[10px] text-slate-500 font-sans mt-0.5">

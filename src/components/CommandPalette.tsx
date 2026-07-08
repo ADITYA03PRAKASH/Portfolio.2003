@@ -167,11 +167,11 @@ export default function CommandPalette() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 flex items-center gap-2 px-3 py-2.5 rounded-full glass-card border border-white/5 hover:border-cyan-500/40 text-slate-400 hover:text-slate-200 transition-all duration-300 z-50 group cursor-pointer text-xs font-semibold"
+        className="fixed bottom-6 left-6 flex items-center gap-2 px-3 py-2.5 rounded-full glass-card border border-black/5 bg-white/70 hover:border-primary/30 text-slate-500 hover:text-slate-850 transition-all duration-300 z-50 group cursor-pointer text-xs font-semibold"
         title="Open Command Palette (Ctrl+K)"
       >
-        <Search className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-        <span className="hidden md:inline font-mono tracking-tight bg-white/5 px-1.5 py-0.5 rounded text-[10px] text-white/50 border border-white/5">
+        <Search className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+        <span className="hidden md:inline font-mono tracking-tight bg-black/5 px-1.5 py-0.5 rounded text-[10px] text-slate-500 border border-black/5">
           Ctrl K
         </span>
       </button>
@@ -180,26 +180,26 @@ export default function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 w-full h-full bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 w-full h-full bg-black/40 backdrop-blur-md z-[100] flex items-center justify-center p-4"
       onClick={() => setIsOpen(false)}
     >
       <div
         ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-[550px] rounded-2xl border border-white/10 glass-card bg-slate-950/80 overflow-hidden shadow-2xl relative"
+        className="w-full max-w-[550px] rounded-2xl border border-black/5 glass-card bg-white/95 overflow-hidden shadow-2xl relative"
         onKeyDown={handleKeyDown}
       >
         {/* Glow overlay */}
-        <div className="absolute top-[-30px] left-1/2 -translate-x-1/2 w-48 h-12 bg-cyan-500/10 blur-xl pointer-events-none" />
+        <div className="absolute top-[-30px] left-1/2 -translate-x-1/2 w-48 h-12 bg-primary/5 blur-xl pointer-events-none" />
 
         {/* Input Bar */}
-        <div className="flex items-center gap-3 p-4 border-b border-white/10">
-          <Search className="w-5 h-5 text-cyan-400 animate-pulse" />
+        <div className="flex items-center gap-3 p-4 border-b border-black/5">
+          <Search className="w-5 h-5 text-primary animate-pulse" />
           <input
             ref={inputRef}
             type="text"
             placeholder="Type a command or search..."
-            className="flex-1 bg-transparent border-none outline-none text-slate-200 text-sm placeholder-slate-500 font-sans"
+            className="flex-1 bg-transparent border-none outline-none text-slate-800 text-sm placeholder-slate-400 font-sans"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -208,7 +208,7 @@ export default function CommandPalette() {
           />
           <button
             onClick={() => setIsOpen(false)}
-            className="text-slate-500 hover:text-slate-200 p-1 hover:bg-white/5 rounded-lg transition-colors cursor-pointer"
+            className="text-slate-500 hover:text-slate-850 p-1 hover:bg-black/5 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -227,7 +227,7 @@ export default function CommandPalette() {
                 }, {} as Record<string, typeof filteredCommands>)
               ).map(([category, items]) => (
                 <div key={category} className="mb-2">
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-slate-500 px-3 py-1.5 font-sans">
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-slate-400 px-3 py-1.5 font-sans">
                     {category}
                   </div>
                   <div className="flex flex-col gap-0.5">
@@ -242,8 +242,8 @@ export default function CommandPalette() {
                           onMouseEnter={() => setActiveIndex(absoluteIndex)}
                           className={`flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-all duration-150 ${
                             isSelected
-                              ? "bg-gradient-to-r from-primary/10 to-cyan-500/10 border border-cyan-500/20 text-cyan-200"
-                              : "border border-transparent text-slate-400 hover:text-slate-300"
+                              ? "bg-primary/5 border border-primary/10 text-primary"
+                              : "border border-transparent text-slate-500 hover:text-slate-850"
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -254,7 +254,7 @@ export default function CommandPalette() {
                           </div>
                           
                           {item.shortcut && (
-                            <kbd className="hidden sm:inline-flex font-mono text-[9px] bg-white/5 px-2 py-0.5 rounded border border-white/5 text-slate-500 select-none">
+                            <kbd className="hidden sm:inline-flex font-mono text-[9px] bg-black/5 px-2 py-0.5 rounded border border-black/5 text-slate-400 select-none">
                               {item.shortcut}
                             </kbd>
                           )}
@@ -266,21 +266,21 @@ export default function CommandPalette() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-8 text-center text-slate-500 gap-2">
-              <Sparkles className="w-8 h-8 text-slate-600" />
+            <div className="flex flex-col items-center justify-center py-8 text-center text-slate-550 gap-2">
+              <Sparkles className="w-8 h-8 text-slate-400" />
               <p className="text-xs font-sans">No matching commands found.</p>
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/5 bg-slate-950/40 text-[10px] text-slate-500 font-sans">
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-black/5 bg-slate-50 text-[10px] text-slate-500 font-sans">
           <div className="flex gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>
             <span>esc to close</span>
           </div>
-          <span className="font-mono text-cyan-500/40">v1.0.0</span>
+          <span className="font-mono text-primary/40">v1.0.0</span>
         </div>
       </div>
     </div>

@@ -33,11 +33,11 @@ export default function CanvasBackground() {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.size = Math.random() * 2 + 1;
         
-        // Luxury palettes: blue, cyan, purple
+        // Luxury palettes: orange, amber, peach
         const colors = [
-          "rgba(37, 99, 235, 0.4)", // Blue
-          "rgba(6, 182, 212, 0.4)", // Cyan
-          "rgba(124, 58, 237, 0.4)", // Purple
+          "rgba(255, 107, 0, 0.25)",  // Primary Orange
+          "rgba(255, 138, 38, 0.25)",  // Secondary Orange
+          "rgba(255, 169, 77, 0.25)",  // Light Orange Accent
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -122,7 +122,7 @@ export default function CanvasBackground() {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+            ctx.strokeStyle = `rgba(255, 107, 0, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -143,14 +143,14 @@ export default function CanvasBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full -z-10 bg-[#050816] overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 w-full h-full -z-10 bg-[#FFFFFF] overflow-hidden pointer-events-none">
       {/* 3D-like glowing blobs */}
-      <div className="absolute top-[20%] left-[10%] w-[35vw] h-[35vw] rounded-full bg-gradient-to-br from-primary/15 to-transparent blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-accent/10 to-transparent blur-[140px] animate-pulse-glow [animation-delay:3s]" />
-      <div className="absolute top-[50%] left-[60%] w-[25vw] h-[25vw] rounded-full bg-gradient-to-br from-secondary/15 to-transparent blur-[100px] animate-pulse-glow [animation-delay:6s]" />
+      <div className="absolute top-[20%] left-[10%] w-[35vw] h-[35vw] rounded-full bg-gradient-to-br from-primary/8 to-transparent blur-[120px] animate-pulse-glow" />
+      <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-accent/5 to-transparent blur-[140px] animate-pulse-glow [animation-delay:3s]" />
+      <div className="absolute top-[50%] left-[60%] w-[25vw] h-[25vw] rounded-full bg-gradient-to-br from-secondary/8 to-transparent blur-[100px] animate-pulse-glow [animation-delay:6s]" />
       
       {/* Mesh/Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-70" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,0,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,0,0.015)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-70" />
       
       {/* Particle Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block" />

@@ -108,8 +108,8 @@ export default function CustomCursor() {
               x: ringX,
               y: ringY,
               scale: isHovered ? 1.6 : isClicking ? 0.8 : 1,
-              backgroundColor: isHovered ? "rgba(6, 182, 212, 0.08)" : "transparent",
-              borderColor: isHovered ? "#7C3AED" : "#06B6D4",
+              backgroundColor: isHovered ? "rgba(255, 107, 0, 0.05)" : "transparent",
+              borderColor: isHovered ? "#FF8A26" : "#FF6B00",
             }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
@@ -124,7 +124,7 @@ export default function CustomCursor() {
           {/* Inner Dot */}
           {!isHovered && (
             <motion.div
-              className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
+              className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
               style={{
                 x: cursorX,
                 y: cursorY,

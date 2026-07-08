@@ -154,10 +154,10 @@ export default function Projects() {
 
       {/* Headline */}
       <div className="text-center mb-12 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-cyan-400 mb-2">
+        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
           Projects Portfolio
         </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-100">
+        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
           Featured Engineering Works
         </p>
         <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
@@ -171,8 +171,8 @@ export default function Projects() {
             onClick={() => setFilter(cat)}
             className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
               filter === cat
-                ? "bg-gradient-to-r from-primary/20 to-cyan-500/20 border border-cyan-500/30 text-cyan-200"
-                : "bg-white/5 border border-white/5 text-slate-400 hover:text-slate-200"
+                ? "bg-primary/5 border border-primary/20 text-primary"
+                : "bg-black/5 border border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
             {cat}
@@ -202,26 +202,26 @@ export default function Projects() {
                   onMouseMove={(e) => cardRef && handleMouseMove(e, cardRef)}
                   onMouseLeave={() => cardRef && handleMouseLeave(cardRef)}
                   style={{ transition: "transform 0.15s ease-out" }}
-                  className="rounded-2xl glass-card border border-white/5 p-6 relative overflow-hidden flex flex-col h-full group"
+                  className="rounded-2xl glass-card border border-black/5 bg-white/70 p-6 relative overflow-hidden flex flex-col h-full group"
                 >
                   {/* Subtle Gradient background blobs */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${p.gradient} pointer-events-none opacity-50`} />
+                  <div className={`absolute inset-0 bg-gradient-to-b ${p.gradient} pointer-events-none opacity-20`} />
 
                   {/* Icon and Category */}
                   <div className="flex items-center justify-between mb-6 z-10">
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-3 rounded-xl bg-primary/5 border border-primary/10 group-hover:scale-110 transition-transform duration-300">
                       {p.icon}
                     </div>
-                    <span className="text-[9px] uppercase font-extrabold tracking-widest text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                    <span className="text-[9px] uppercase font-extrabold tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/10">
                       {p.category}
                     </span>
                   </div>
 
                   {/* Info */}
-                  <h3 className="font-heading text-lg font-bold text-slate-200 mb-2 group-hover:text-cyan-400 transition-colors z-10">
+                  <h3 className="font-heading text-lg font-bold text-slate-850 mb-2 group-hover:text-primary transition-colors z-10">
                     {p.title}
                   </h3>
-                  <p className="text-xs text-slate-400 leading-relaxed font-sans mb-6 flex-grow z-10">
+                  <p className="text-xs text-slate-500 leading-relaxed font-sans mb-6 flex-grow z-10">
                     {p.desc}
                   </p>
 
@@ -230,20 +230,20 @@ export default function Projects() {
                     {p.tech.slice(0, 4).map((t, idx) => (
                       <span
                         key={idx}
-                        className="text-[9px] font-mono text-slate-500 bg-slate-950/60 px-2 py-0.5 rounded border border-white/5"
+                        className="text-[9px] font-mono text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-black/5"
                       >
                         {t}
                       </span>
                     ))}
                     {p.tech.length > 4 && (
-                      <span className="text-[9px] font-mono text-slate-500 bg-slate-950/60 px-1.5 py-0.5 rounded border border-white/5">
+                      <span className="text-[9px] font-mono text-slate-600 bg-slate-50 px-1.5 py-0.5 rounded border border-black/5">
                         +{p.tech.length - 4}
                       </span>
                     )}
                   </div>
 
                   {/* Hover indicator link */}
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-cyan-400 group-hover:translate-x-1.5 transition-transform z-10">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-primary group-hover:translate-x-1.5 transition-transform z-10">
                     View Details
                     <Eye className="w-3.5 h-3.5" />
                   </div>
@@ -258,7 +258,7 @@ export default function Projects() {
       <AnimatePresence>
         {selectedProject && (
           <div
-            className="fixed inset-0 w-full h-full bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4"
+            className="fixed inset-0 w-full h-full bg-black/40 backdrop-blur-md z-[100] flex items-center justify-center p-4"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -267,43 +267,43 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.95, y: 30 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[700px] max-h-[85vh] rounded-2xl border border-white/10 glass-card bg-slate-950/90 overflow-y-auto shadow-2xl relative p-6 sm:p-8 scrollbar-thin"
+              className="w-full max-w-[700px] max-h-[85vh] rounded-2xl border border-black/5 glass-card bg-white/95 overflow-y-auto shadow-2xl relative p-6 sm:p-8 scrollbar-thin"
             >
               {/* Top gradient spotlight */}
-              <div className={`absolute top-0 left-0 w-full h-40 bg-gradient-to-b ${selectedProject.gradient} pointer-events-none opacity-40`} />
+              <div className={`absolute top-0 left-0 w-full h-40 bg-gradient-to-b ${selectedProject.gradient} pointer-events-none opacity-20`} />
 
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 text-slate-500 hover:text-slate-200 p-1.5 hover:bg-white/5 rounded-lg transition-colors cursor-pointer z-10"
+                className="absolute top-4 right-4 text-slate-500 hover:text-slate-800 p-1.5 hover:bg-black/5 rounded-lg transition-colors cursor-pointer z-10"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {/* Header */}
               <div className="flex items-center gap-4 mb-6 z-10 relative mt-4">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10">
                   {selectedProject.icon}
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-primary">
                     {selectedProject.category}
                   </span>
-                  <h3 className="font-heading text-2xl sm:text-3xl font-black text-slate-100 mt-1">
+                  <h3 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mt-1">
                     {selectedProject.title}
                   </h3>
                 </div>
               </div>
 
               {/* Detailed Content */}
-              <div className="space-y-6 font-sans text-sm relative z-10 text-slate-300">
+              <div className="space-y-6 font-sans text-sm relative z-10 text-slate-700">
                 
                 {/* Description */}
                 <div>
                   <h4 className="font-heading text-xs uppercase font-extrabold tracking-widest text-slate-500 mb-2">
                     Overview
                   </h4>
-                  <p className="leading-relaxed text-slate-400">
+                  <p className="leading-relaxed text-slate-655">
                     {selectedProject.desc}
                   </p>
                 </div>
@@ -317,7 +317,7 @@ export default function Projects() {
                     {selectedProject.tech.map((t, idx) => (
                       <span
                         key={idx}
-                        className="text-xs font-mono text-cyan-200 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20"
+                        className="text-xs font-mono text-primary bg-primary/5 px-2.5 py-1 rounded-full border border-primary/10"
                       >
                         {t}
                       </span>
@@ -330,7 +330,7 @@ export default function Projects() {
                   <h4 className="font-heading text-xs uppercase font-extrabold tracking-widest text-slate-500 mb-2">
                     Key Features
                   </h4>
-                  <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                  <ul className="list-disc pl-5 space-y-1.5 text-slate-500">
                     {selectedProject.features.map((feat, idx) => (
                       <li key={idx} className="leading-relaxed">
                         {feat}
@@ -344,7 +344,7 @@ export default function Projects() {
                   <h4 className="font-heading text-xs uppercase font-extrabold tracking-widest text-slate-500 mb-2">
                     Technical Challenges
                   </h4>
-                  <p className="leading-relaxed text-slate-400">
+                  <p className="leading-relaxed text-slate-500">
                     {selectedProject.challenges}
                   </p>
                 </div>
@@ -354,7 +354,7 @@ export default function Projects() {
                   <h4 className="font-heading text-xs uppercase font-extrabold tracking-widest text-slate-500 mb-2">
                     System Architecture
                   </h4>
-                  <div className="font-mono text-xs bg-slate-950 p-4 rounded-xl border border-white/5 text-cyan-400/90 leading-relaxed overflow-x-auto whitespace-pre-wrap">
+                  <div className="font-mono text-xs bg-slate-50 p-4 rounded-xl border border-black/5 text-primary leading-relaxed overflow-x-auto whitespace-pre-wrap">
                     {selectedProject.architecture}
                   </div>
                 </div>
@@ -362,12 +362,12 @@ export default function Projects() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/15 relative z-10">
+              <div className="flex items-center gap-4 mt-8 pt-6 border-t border-black/10 relative z-10">
                 <a
                   href={selectedProject.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-orange-500/10 hover:scale-105 transition-all duration-300 flex items-center gap-2 cursor-pointer"
                 >
                   Live Demo
                   <ExternalLink className="w-4 h-4" />
@@ -376,7 +376,7 @@ export default function Projects() {
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-2.5 rounded-full bg-black/5 hover:bg-black/10 border border-transparent text-slate-600 hover:text-slate-800 font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
                 >
                   GitHub Repository
                   <GitHub className="w-4 h-4" />

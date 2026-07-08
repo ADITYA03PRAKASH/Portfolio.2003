@@ -58,13 +58,13 @@ export default function Services() {
 
       {/* Title */}
       <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-purple-400 mb-2">
+        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
           What I Offer
         </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-100">
+        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
           Professional Services & Solutions
         </p>
-        <span className="w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full mt-4" />
+        <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
       </div>
 
       {/* Services Grid */}
@@ -76,34 +76,34 @@ export default function Services() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="p-6 rounded-2xl glass-card border border-white/5 hover:border-cyan-500/20 transition-all duration-300 flex flex-col justify-between group h-full relative"
+            className="p-6 rounded-2xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between group h-full relative"
           >
             {/* Background spotlight shine */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
 
             <div>
               {/* Icon Container */}
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 w-fit mb-6 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-cyan-500/10 group-hover:border-cyan-500/30 group-hover:scale-110 transition-all duration-300">
+              <div className="p-3.5 rounded-xl bg-primary/5 border border-primary/10 w-fit mb-6 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-secondary/10 group-hover:border-primary/30 group-hover:scale-110 transition-all duration-300">
                 {srv.icon}
               </div>
 
               {/* Title */}
-              <h3 className="font-heading text-base font-bold text-slate-200 mb-3 group-hover:text-cyan-400 transition-colors">
+              <h3 className="font-heading text-base font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors">
                 {srv.title}
               </h3>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans mb-6">
+              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans mb-6">
                 {srv.desc}
               </p>
             </div>
 
             {/* Badges footer */}
-            <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
+            <div className="flex flex-wrap gap-1.5 pt-4 border-t border-black/5">
               {srv.tech.map((t, tIdx) => (
                 <span
                   key={tIdx}
-                  className="text-[9px] font-mono text-slate-500 group-hover:text-cyan-300/80 bg-slate-950/60 px-2 py-0.5 rounded border border-white/5 transition-colors"
+                  className="text-[9px] font-mono text-slate-600 group-hover:text-primary bg-slate-50 px-2 py-0.5 rounded border border-black/5 transition-colors"
                 >
                   {t}
                 </span>

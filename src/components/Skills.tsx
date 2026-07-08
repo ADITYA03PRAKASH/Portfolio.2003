@@ -93,13 +93,13 @@ export default function Skills() {
 
       {/* Section Title */}
       <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-purple-400 mb-2">
+        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
           Skills Showcase
         </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-100">
+        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
           Core Competency Matrix
         </p>
-        <span className="w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full mt-4" />
+        <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
       </div>
 
       {/* Skills Grid */}
@@ -111,17 +111,17 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className={`group p-6 rounded-2xl glass-card border border-white/5 ${category.color} transition-all duration-500 relative overflow-hidden`}
+            className={`group p-6 rounded-2xl glass-card border border-black/5 bg-white/75 ${category.color} transition-all duration-500 relative overflow-hidden`}
           >
             {/* Soft background light */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
 
             {/* Category Header */}
             <div className="flex items-center gap-3.5 mb-6">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-2.5 rounded-xl bg-primary/5 border border-primary/10 group-hover:scale-110 transition-transform duration-300">
                 {category.icon}
               </div>
-              <h3 className="font-heading text-base font-bold text-slate-200">
+              <h3 className="font-heading text-base font-bold text-slate-800">
                 {category.title}
               </h3>
             </div>
@@ -130,13 +130,13 @@ export default function Skills() {
             <div className="space-y-4 font-sans">
               {category.skills.map((skill, sIdx) => (
                 <div key={sIdx} className="space-y-1.5">
-                  <div className="flex justify-between text-xs font-semibold text-slate-400 group-hover:text-slate-200 transition-colors">
+                  <div className="flex justify-between text-xs font-semibold text-slate-500 group-hover:text-slate-800 transition-colors">
                     <span>{skill.name}</span>
                     <span>{skill.level}%</span>
                   </div>
                   
                   {/* Outer track */}
-                  <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden border border-white/5">
+                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden border border-black/5">
                     {/* Inner fill */}
                     <motion.div
                       initial={{ width: 0 }}

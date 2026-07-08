@@ -146,9 +146,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex self-center lg:self-start items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-xs font-semibold tracking-wider uppercase animate-pulse"
+            className="inline-flex self-center lg:self-start items-center gap-2 px-3 py-1 rounded-full border border-primary/10 bg-primary/5 text-primary text-xs font-semibold tracking-wider uppercase animate-pulse"
           >
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
+            <span className="w-2 h-2 rounded-full bg-primary" />
             Open for Opportunities
           </motion.div>
 
@@ -159,7 +159,7 @@ export default function Hero() {
             className="font-heading text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1]"
           >
             Hello, I&apos;m <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-black drop-shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-black drop-shadow-[0_0_20px_rgba(255,107,0,0.15)]">
               Aditya Prakash Dwivedi
             </span>
           </motion.h1>
@@ -168,10 +168,10 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg sm:text-2xl text-slate-300 font-semibold h-8 min-h-[32px] flex items-center justify-center lg:justify-start"
+            className="text-lg sm:text-2xl text-slate-700 font-semibold h-8 min-h-[32px] flex items-center justify-center lg:justify-start"
           >
             I build next-generation&nbsp;
-            <span className="text-secondary border-r-2 border-secondary animate-pulse pr-1">
+            <span className="text-primary border-r-2 border-primary animate-pulse pr-1">
               {currentText}
             </span>
           </motion.h2>
@@ -180,7 +180,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed mx-auto lg:mx-0 font-sans"
+            className="text-sm sm:text-base text-slate-500 max-w-xl leading-relaxed mx-auto lg:mx-0 font-sans"
           >
             Creating premium full stack web platforms, intelligent AI voice agents, and high-performance automation software that elevates businesses and developers.
           </motion.p>
@@ -193,23 +193,23 @@ export default function Hero() {
           >
             <button
               onClick={() => handleScrollTo("projects")}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold text-sm tracking-wide shadow-[0_4px_25px_rgba(255,107,0,0.2)] hover:scale-105 transition-all duration-300 flex items-center gap-2 group cursor-pointer"
             >
               View Projects
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => handleScrollTo("contact")}
-              className="px-6 py-3 rounded-full glass-card hover:bg-white/5 border border-white/10 hover:border-cyan-500/30 text-slate-300 hover:text-white font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3 rounded-full glass-card hover:bg-primary/5 border border-black/5 hover:border-primary/20 text-slate-700 hover:text-primary font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
             >
               Hire Me
-              <Mail className="w-4 h-4 text-cyan-400" />
+              <Mail className="w-4 h-4 text-primary" />
             </button>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 text-slate-400 hover:text-slate-200 font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3 rounded-full bg-black/5 hover:bg-black/10 border border-transparent text-slate-600 hover:text-slate-800 font-bold text-sm tracking-wide transition-all duration-300 flex items-center gap-2 cursor-pointer"
             >
               Resume
               <Download className="w-4 h-4" />
@@ -225,17 +225,17 @@ export default function Hero() {
           className="lg:col-span-5 w-full flex justify-center"
         >
           {/* Glass Terminal container */}
-          <div className="w-full max-w-[450px] aspect-[4/3] rounded-2xl border border-white/10 glass-card bg-slate-950/70 overflow-hidden shadow-2xl relative flex flex-col">
+          <div className="w-full max-w-[450px] aspect-[4/3] rounded-2xl border border-black/5 glass-card bg-white/70 overflow-hidden shadow-2xl relative flex flex-col">
             
             {/* Terminal Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-slate-950/60 select-none">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-black/5 bg-slate-50 select-none">
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-red-500/80" />
                 <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <span className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
               <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-mono tracking-tight">
-                <TermIcon className="w-3 h-3 text-cyan-500" />
+                <TermIcon className="w-3 h-3 text-primary" />
                 aditya@shell:~
               </div>
               <span className="w-12" /> {/* spacing element */}
@@ -248,12 +248,12 @@ export default function Hero() {
                   key={idx}
                   className={`leading-relaxed break-words whitespace-pre-wrap ${
                     line.type === "input"
-                      ? "text-cyan-300"
+                      ? "text-primary font-bold"
                       : line.type === "error"
-                      ? "text-red-400"
+                      ? "text-red-600 font-bold"
                       : line.type === "system"
-                      ? "text-purple-400 font-semibold"
-                      : "text-slate-300"
+                      ? "text-purple-600 font-semibold"
+                      : "text-slate-700"
                   }`}
                 >
                   {line.text}
@@ -265,13 +265,13 @@ export default function Hero() {
             {/* Terminal Input Form */}
             <form
               onSubmit={handleTerminalSubmit}
-              className="flex items-center gap-2 p-3 border-t border-white/10 bg-slate-950/50"
+              className="flex items-center gap-2 p-3 border-t border-black/5 bg-slate-50/50"
             >
-              <ChevronRight className="w-4 h-4 text-cyan-400 shrink-0" />
+              <ChevronRight className="w-4 h-4 text-primary shrink-0" />
               <input
                 id="terminal-cli-input"
                 type="text"
-                className="flex-1 bg-transparent border-none outline-none font-mono text-xs text-slate-200 placeholder-slate-600"
+                className="flex-1 bg-transparent border-none outline-none font-mono text-xs text-slate-800 placeholder-slate-400"
                 placeholder="Type 'help'..."
                 value={terminalInput}
                 onChange={(e) => setTerminalInput(e.target.value)}
@@ -288,7 +288,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="absolute bottom-6 flex items-center gap-8 text-[11px] uppercase font-bold tracking-widest text-slate-500 pointer-events-none select-none z-10"
+        className="absolute bottom-6 flex items-center gap-8 text-[11px] uppercase font-bold tracking-widest text-slate-400 pointer-events-none select-none z-10"
       >
         <span>available worldwide</span>
         <span>•</span>

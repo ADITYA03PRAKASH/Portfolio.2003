@@ -53,17 +53,17 @@ export default function Experience() {
 
       {/* Section Title */}
       <div className="text-center mb-16 flex flex-col items-center">
-        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-cyan-400 mb-2">
+        <h2 className="font-heading text-xs uppercase tracking-widest font-black text-primary mb-2">
           Career Path
         </h2>
-        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-100">
+        <p className="font-heading text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
           Professional Work Experience
         </p>
         <span className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-4" />
       </div>
 
       {/* Timeline Layout */}
-      <div className="relative border-l border-white/10 pl-6 md:pl-10 space-y-12 py-2 max-w-4xl mx-auto">
+      <div className="relative border-l border-black/10 pl-6 md:pl-10 space-y-12 py-2 max-w-4xl mx-auto">
         {experiences.map((exp, idx) => (
           <motion.div
             key={idx}
@@ -74,26 +74,26 @@ export default function Experience() {
             className="relative group"
           >
             {/* Timeline Circle Node */}
-            <div className="absolute -left-[35px] md:-left-[51px] top-2 w-[18px] h-[18px] md:w-[22px] md:h-[22px] rounded-full bg-slate-950 border-2 border-white/20 flex items-center justify-center group-hover:border-cyan-400 transition-colors z-10 shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute -left-[35px] md:-left-[51px] top-2 w-[18px] h-[18px] md:w-[22px] md:h-[22px] rounded-full bg-white border-2 border-black/10 flex items-center justify-center group-hover:border-primary transition-colors z-10 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
 
             {/* Experience Card */}
-            <div className="p-6 rounded-2xl glass-card border border-white/5 hover:border-white/10 transition-all duration-300 relative overflow-hidden">
+            <div className="p-6 rounded-2xl glass-card border border-black/5 bg-white/70 hover:border-primary/20 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 relative overflow-hidden">
               
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-6">
                 <div>
-                  <h3 className="font-heading text-lg sm:text-xl font-bold text-slate-200 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-slate-800 group-hover:text-primary transition-colors">
                     {exp.role}
                   </h3>
-                  <p className="font-heading text-sm text-cyan-400/80 font-semibold mt-0.5">
+                  <p className="font-heading text-sm text-primary font-semibold mt-0.5">
                     {exp.company}
                   </p>
                 </div>
                 
                 <div className="flex flex-col sm:items-end text-xs text-slate-500 font-sans">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-400">
+                  <span className="flex items-center gap-1.5 font-semibold text-slate-500">
                     <Calendar className="w-3.5 h-3.5" />
                     {exp.duration}
                   </span>
@@ -102,7 +102,7 @@ export default function Experience() {
               </div>
 
               {/* Grid Responsibilities and Achievements */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans text-xs sm:text-sm text-slate-400">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans text-xs sm:text-sm text-slate-500">
                 
                 {/* Responsibilities */}
                 <div>
@@ -128,7 +128,7 @@ export default function Experience() {
                   </h4>
                   <ul className="space-y-2">
                     {exp.achievements.map((ach, aIdx) => (
-                      <li key={aIdx} className="leading-relaxed flex items-start gap-2 text-slate-300">
+                      <li key={aIdx} className="leading-relaxed flex items-start gap-2 text-slate-600">
                         <span className="w-1.5 h-1.5 rounded bg-secondary mt-1.5 shrink-0" />
                         <span>{ach}</span>
                       </li>

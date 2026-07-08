@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563EB;
-  --color-secondary: #06B6D4;
-  --color-accent: #7C3AED;
-  --color-dark-bg: #050816;
-  --color-card-bg: rgba(255, 255, 255, 0.05);
-  --color-border-color: rgba(255, 255, 255, 0.08);
+  --color-primary: #FF6B00;
+  --color-secondary: #FF8A26;
+  --color-accent: #FFA94D;
+  --color-dark-bg: #FFFFFF;
+  --color-card-bg: rgba(255, 255, 255, 0.7);
+  --color-border-color: rgba(17, 24, 39, 0.08);
 
   --font-heading: var(--font-space-grotesk), sans-serif;
   --font-body: var(--font-inter), sans-serif;
@@ -15,20 +15,19 @@
   --animate-border-flow: border-flow 6s infinite linear;
   
   @keyframes pulse-glow {
-    0%, 100% { opacity: 0.3; transform: scale(1) translate(0, 0); }
-    50% { opacity: 0.6; transform: scale(1.1) translate(20px, -20px); }
+    0%, 100% { opacity: 0.2; transform: scale(1) translate(0, 0); }
+    50% { opacity: 0.4; transform: scale(1.08) translate(15px, -15px); }
   }
   @keyframes border-flow {
-    0% { border-color: rgba(37, 99, 235, 0.4); }
-    33% { border-color: rgba(6, 182, 212, 0.4); }
-    66% { border-color: rgba(124, 58, 237, 0.4); }
-    100% { border-color: rgba(37, 99, 235, 0.4); }
+    0% { border-color: rgba(255, 107, 0, 0.2); }
+    55% { border-color: rgba(255, 138, 38, 0.2); }
+    100% { border-color: rgba(255, 107, 0, 0.2); }
   }
 }
 
 :root {
-  --background: #050816;
-  --foreground: #f8fafc;
+  --background: #FFFFFF;
+  --foreground: #111827;
 }
 
 * {
@@ -38,11 +37,11 @@
 }
 
 html, body {
-  background-color: #050816;
-  color: #f8fafc;
+  background-color: #FFFFFF;
+  color: #111827;
   font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
-  scroll-behavior: auto; /* Handled by Lenis smooth scroll */
+  scroll-behavior: auto; /* Handled by Lenis */
 }
 
 /* Custom Scrollbar */
@@ -50,41 +49,38 @@ html, body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050816;
+  background: #FFF8F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 107, 0, 0.2);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 107, 0, 0.4);
 }
 
-/* Glassmorphism Styles */
+/* Glassmorphism Styles (Light Mode) */
 .glass-card {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(17, 24, 39, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01);
   transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(6, 182, 212, 0.3);
-  box-shadow: 0 10px 40px rgba(6, 182, 212, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 107, 0, 0.25);
+  box-shadow: 0 15px 40px rgba(255, 107, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
-/* Glow Effects */
+/* Soft Glow Effects */
 .glow-primary {
-  box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 0 40px rgba(255, 107, 0, 0.06);
 }
 .glow-secondary {
-  box-shadow: 0 0 40px rgba(6, 182, 212, 0.25);
-}
-.glow-accent {
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 40px rgba(255, 138, 38, 0.06);
 }
 
 /* Dynamic Gradients */
@@ -92,7 +88,7 @@ html, body {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
-/* Cursor Glow Overlay */
+/* Cursor Glow Spotlight (Soft Orange Overlay) */
 .cursor-spotlight {
   pointer-events: none;
   position: fixed;
@@ -101,8 +97,8 @@ html, body {
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(6, 182, 212, 0.04), transparent 40%),
-              radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(124, 58, 237, 0.03), transparent 40%);
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 107, 0, 0.025), transparent 45%),
+              radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 138, 38, 0.015), transparent 45%);
 }
 
 /* Magnetic Button support */
@@ -132,9 +128,10 @@ html, body {
 /* Custom terminal scanlines */
 .terminal-scanline {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
+    rgba(255, 255, 255, 0) 50%, 
+    rgba(255, 107, 0, 0.01) 50%
   );
   background-size: 100% 4px;
 }
+
 
